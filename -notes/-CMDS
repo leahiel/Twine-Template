@@ -1,0 +1,33 @@
+	Sugarcube Documentation: 
+https://www.motoslave.net/sugarcube/2/docs/
+
+    Tweego Documentation:
+https://www.motoslave.net/tweego/docs/
+
+    Build for Release:
+tweegoc -o index.html src -l    # html
+npm run make                    # win32-x64
+
+
+    Hot Rebuild on Change:
+# -t enables test mode. Delete that if desired.
+tweegoc -o index.html src -l -w -t
+
+
+
+cd C:\Users\Samuel\Desktop\leah-inspection-service
+git branch
+
+git add -p .
+git commit -m "message"
+
+# Create Pull Request on GitHub
+git push -u origin branch
+
+# Push the new main to your fork's master. You MUST do this.
+git checkout master
+git pull --rebase upstream master
+git push origin master
+
+# Update Remote to be correct if it has been set wrong at configuration.
+https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/configuring-a-remote-for-a-fork
