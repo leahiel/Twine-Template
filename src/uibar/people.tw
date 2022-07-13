@@ -1,0 +1,115 @@
+:: PeopleText [.uibar nostats] {"position":"125,950"}
+@@.dialog-header;People@@
+<<include [[P_Hops]]>>
+<<include [[P_Lilac]]>>
+<<include [[P_Orick]]>>
+<<include [[P_Ralph]]>>
+<<include [[P_Sarah]]>>
+
+
+
+:: P_Template [.people] {"position":"125,975"}
+<<if $ppl_tmpl_met>>
+<<if true>>
+    @@.knowledge;Template Matter:@@<br>
+    Lorem Ipsum about template matter.
+<</if>>
+<</if>>
+
+
+
+:: P_Hops [.people] {"position":"125,1000"}
+<<if $ev_lilac_orders_you>> * Lilac ordered you to visit Nurse Hops after finding your blood unsatisfactory.<</if>>
+<<if $ppl_hops_met>>
+<<if $ppl_hops_lv gte 1>>
+    @@.knowledge;Nurse Hops:@@<br>
+    A cranky old croak of a toad who runs the magical malformation ward at Miraj. She's old, wrinkly, and frankly, looks like she's about to croak her last croak soon. Her amphibian green skin looks like it could use some good moisturizing. <<if $ppl_hops_lv gte 2>>There is no doubt in your mind that she is an expert at her profession.<</if>>
+    <<if $ev_lilac_orders_you>> * Lilac ordered you to visit Nurse Hops after finding your blood unsatisfactory.
+    <</if>>
+    <<if $ev_delay_nurse>>* She was upset you didn't come to see her as soon as you ingested some of that metaphorizing concretion.
+    <</if>>
+    <<if ($ev_hops_undressing && !$ev_hops_insertion_orgasm)>>* She's seen you undress while medically attending to you, and it made you very uncomfortable.
+    <<elseif $ev_hops_insertion_orgasm>>* You orgasmed during her medical examination of your rectal mucus membranes. <<if$ev_hops_insertion_orgasm_while_genderless>>She was quite proud of making a genitalia-less person cum.<</if>>
+    <</if>>
+    <<if $ev_hops_undressing_denied>>* You decided not to show her your <<if $ev_hops_undressing>>fully naked <</if>>body when she was attending to you<<if $ev_hops_undressing>>, instead she attended to you while you were in your <<if $pcpenis>>underwear<<else>>embarrassingly cute panties<</if>><</if>>.
+    <</if>>
+<</if>>
+<</if>>
+
+
+
+:: P_Lilac [.people] {"position":"125,1025"}
+<<if !$ppl_lilac_met>>
+    @@.knowledge;Lilac:@@<br>
+    Nurse Hops recommends you visit Lilac to learn more about your transformation.
+<<else>>
+    @@.knowledge;Lilac:@@<br>
+    A small little blonde vampire who was turned into a vampire at a young age.
+    <<if $ppl_lilac_pregnant>>
+    <br>
+        * It seems that Lilac is unable to conceive a child.
+    <</if>>
+    <<if $ppl_lilac_fucked>>
+    <br>
+        * Lilac fucked you, and you realized that she soaks up all sexual fluids into her body.
+    <</if>>
+    <<if $ev_lilac_give_massage>>
+    <br>
+        * After Lilac fucked you, you decided to give her a massage. This really seemed to help Lilac work through some issues.
+    <</if>>
+    <<if $ppl_lilac_succubus>>
+    <br>
+        * It turns out that Lilac is a succubus, not a vampire. She's been hiding it due to the stigma surrounding vampires.
+    <</if>>
+<</if>>
+
+
+
+:: P_Orick [.people] {"position":"125,1050"}
+<<if $ppl_orick_met>>
+    @@.knowledge;Orick:@@<br>
+    A dusty goblin who tried to sell you the Metamorphizing Concretion he found in the tower of Urga.
+<<if $ppl_orick_lv gte 1>>
+    Orick also seems to know a variety of magical creatures, being able to identify the metamorphizing sylphs in the metamorphizing concretion.
+<</if>>
+<</if>>
+
+
+
+:: P_Ralph [.people] {"position":"125,1075"}
+<<if $ppl_ralph_met>>
+    @@.knowledge;Template Matter:@@<br>
+    You don't know much about Ralph, except that he's a spindly man who studies a lot in his books.
+<</if>>
+<<if $ppl_ralph_lilac_suggest>>
+    * Lilac suggests you to use Ralph to test your culpability tonic.
+<</if>>
+<<if $ppl_ralph_learn_crush>>
+    * It turns out that Ralph likes Sarah.
+<</if>>
+<<if $ppl_sarah_ralph_secret>>
+    * Ralph has been working with Sarah to make a lust being to provide sexual satisfication to each other.
+<</if>>
+<<if $ev_ralph_raped>>
+    * You raped Ralph, he didn't handle it well.
+<</if>>
+
+
+
+:: P_Sarah [.people] {"position":"125,1100"}
+<<if $ppl_sarah_met>>
+    @@.knowledge;Template Matter:@@<br>
+    You don't know much about Sarah, except that she constantly wanders out of the Tower in her research.
+<</if>>
+<<if $ppl_sarah_lilac_suggest>>
+    * Lilac suggests you to use Sarah to test your culpability tonic.
+<</if>>
+<<if $ppl_sarah_learn_crush>>
+    * It turns out that Sarah likes Ralph, and keeps leaving the tower in order to not burden him with her love.
+<</if>>
+<<if $ppl_sarah_ralph_secret>>
+    * Sarah has been working with Ralph to make a lust being to provide sexual satisfication to each other.
+<</if>>
+<<if $ev_sarah_raped>>
+    * You attempted to rape Sarah, but it didn't end well for you.
+<</if>>

@@ -1,0 +1,252 @@
+:: StoryTitle [.initialize] {"position":"0,675"}
+My Twine Story
+
+
+
+:: StoryData [.initialize] {"position":"0,775"}
+{
+	"ifid": "AB138CAA-00A2-4796-831A-3F5B5DC105E9",
+    "format": "SugarCube",
+    "format-version": "2.36.1"
+}
+
+
+
+:: StorySubtitle [.initialize] {"position":"0,700"}
+(A Template)
+
+
+
+:: StoryAuthor [.initialize] {"position":"0,725"}
+LeahPeach
+
+
+
+:: StoryInit [.initialize] {"position":"0,750"}
+/* Everything here is only called once, when the story is initialized.
+This is great for variables and settings. */
+
+/* The body parts the playable character has. */
+<<set $pc to {}>>
+
+<<script>>
+/* Here we add the tooltip functionality to the macro system. We also 
+initialize the corresponding variables here, so we can keep 
+everything tidy. */
+
+/* Set a tooltip for a singular word. This also makes it a template. */
+function add_tooltip (macroname, passage, metaname = false) {
+    let psg = Story.get(passage);
+    Template.add(macroname, function () {
+        let name = metaname ? metaname : this.name;
+
+        // Only show tooltips if they're enabled in settings.
+        if (settings.tooltips) {
+            return "<<tt " + psg.title + ">>" + name + "<</tt>>"
+        } else {
+            return name;
+        }
+        
+    });
+};
+
+
+/* DEV FEATURES */
+/* HACK: For some reason, the StoryMenu isn't able to comprehend the 
+Config.debug value. */
+variables().dev_test = Config.debug;
+
+/* TODO: These variables don't update when added to the script, reload 
+the script, and then refresh. This is fine for most things, but 
+when things are added here, I want them to be initialized on the 
+save file created in a previous version. */
+
+
+/* USER IDENTIFICATION FEATURES  */
+/* Useful if you have server-side stuff that you're doing. */
+/*
+importScripts("src/assets/js/uuid.min.js")
+    .then(function () {
+        if (!recall('user-uuid')) {
+            memorize('user-uuid',  uuid_v4());
+        }
+    })
+    .catch(function (e) {
+        console.warn(e);
+    })
+;
+*/
+
+/* GAME FEATURES */
+variables().ft_knowledge = false;
+variables().ft_people = false;
+variables().ft_disable = [];
+variables().ft_warning = [];
+
+/* STATE/STATUS  */
+/* Information about your current state or status.  */
+/*
+    "pc" == Playable Character
+    "pp" == Permanent Partner
+    "tp" == Temporary Partner
+*/
+variables().pc_nude = false;
+variables().pc_topless = false;
+
+/* EVENTS  */
+/* prologue */
+variables().ev_ingested_concretion = false;
+variables().ev_orick_warned = false;
+
+/* stage 1 */
+variables().ev_delay_nurse = false;
+variables().ev_ignored_orick_warning = false;
+variables().ev_culp_powder_grounded = false;
+variables().ev_pollen_on_you = false;
+variables().ev_culp_pollen_high = false;
+variables().ev_lilac_orders_you = false;
+variables().ev_lilac_grab_ass = false;
+variables().ev_lilac_searched_for = false;
+variables().ev_lilac_in_room = false;
+variables().ev_lilac_give_massage = false;
+variables().ev_rushed = false;
+
+/* stage 1 */
+variables().ev_culp_tonic_correct = false;
+variables().ev_ralph_raped = false;
+variables().ev_sarah_raped = false;
+variables().ev_culp_tonic_correct = false;
+
+/* KNOWLEDGE */
+/* These are used for tooltips and also in the knowledge tab. See uibar/knowledge.tw */
+variables().kn_culpabilitytonic_lv = 0;
+add_tooltip("culpability", "K_CulpabilityTonic", "culpability tonic");
+
+variables().kn_homunculi_lv = 0;
+add_tooltip(["homunculus", "homunculi"], "K_Homunculi");
+
+variables().kn_concretion_lv = 0;
+add_tooltip("concretion", "K_Concretion", "metamorphizing concretion");
+
+variables().kn_digestive_systems_lv = 0;
+variables().kn_ruminant_gastric_lv = 0;
+variables().kn_single_gastric_lv = 0;
+variables().kn_magical_gastric_lv = 0;
+add_tooltip("digestive", "K_DigestiveSystems");
+add_tooltip("ruminants", "K_RuminantGastricSystem");
+add_tooltip("singlegastric", "K_SingleGastricSystem", "single gastric");
+add_tooltip("magicalgastric", "K_MagicalGastricSystem", "magical gastric");
+
+variables().kn_fairy_lv = 0;
+add_tooltip(["fairy", "fairies"], "K_Fairies")
+add_tooltip("femalefairy", "K_Fairies", "female fairy")
+
+variables().kn_ferrouscompound_lv = 0;
+add_tooltip("ferrouscompound", "K_FerrousCompound", "ferrous compound");
+
+variables().kn_keratin_lv = 0;
+add_tooltip("keratin", "K_Keratin");
+
+variables().kn_merfolk_lv = 0;
+add_tooltip(["merfolk", "merperson", "mermaid", "merman"], "K_Merfolk");
+
+variables().kn_minotaurs = false;
+add_tooltip(["minotaurs"], "K_Minotaurs");
+
+variables().kn_nurses = false;
+variables().kn_nurses_maladies = false;
+variables().kn_nurses_maladies_lv = 0; 
+variables().kn_nurses_malformation = false;
+add_tooltip(["nurses", "Nurse"], "K_Nurses");
+add_tooltip(["maladies", "Maladies"], "K_NursesMaladies");
+add_tooltip(["malformations", "malformation", "Malformations"], "K_NursesMalformations");
+
+variables().kn_royal_knights_lv = 0;
+add_tooltip("RoyalKnights", "K_RoyalKnights", "Royal Knights");
+
+variables().kn_sylphs_lv = 0;
+add_tooltip(["sylphs", "sylph"], "K_Sylphs");
+
+variables().kn_vampire_lv = 0;
+add_tooltip(["vampire", "vampires"], "K_Vampires");
+
+
+// PEOPLE
+/* These are used for tooltips and also in the people tab. See uibar/people.tw */
+variables().ppl_hops_met = false;
+variables().ppl_hops_lv = 0;
+add_tooltip("Hops", "P_Hops", "Nurse Hops");
+
+variables().ppl_orick_met = false;
+variables().ppl_orick_lv = 0;
+add_tooltip("Orick", "P_Orick");
+
+variables().ppl_lilac_met = false;
+variables().ppl_lilac_lv = 0;
+variables().ppl_lilac_pregnant = false;
+variables().ppl_lilac_fucked = false;
+variables().ppl_lilac_succubus = false;
+add_tooltip("Lilac", "P_Lilac");
+
+variables().ppl_ralph_met = false;
+variables().ppl_ralph_lilac_suggest = false;
+variables().ppl_ralph_learn_crush = false;
+variables().ppl_ralph_lv = 0;
+add_tooltip("Ralph", "P_Ralph");
+
+variables().ppl_sarah_met = false;
+variables().ppl_sarah_lilac_suggest = false;
+variables().ppl_sarah_learn_crush = false;
+variables().ppl_sarah_ralph_secret = false;
+variables().ppl_sarah_lv = 0;
+add_tooltip("Sarah", "P_Sarah");
+
+
+// LOCATIONS
+// Locations are completely unimplemented, but would be used the same way as people, but you discover them instead of meeting them.
+variables().loc_miraj_disc = false;
+variables().loc_tower_miraj = 0;
+
+variables().loc_urga_disc = false;
+variables().loc_tower_urga = 0;
+
+
+// TOOLTIPS
+/* Misc. things that I want to have a tooltip but will otherwise never be seen. */
+add_tooltip("imbiber", "TT_Imbiber");
+
+
+// SETTINGS MENU STUFF.
+// Toggle the option for images.
+// Setting.addToggle("images", {
+//     label: "Allow images?",
+//     default: true
+// })
+
+// Toggle option for tooltips.
+Setting.addToggle("tooltips", {
+    label: "Show tooltips on important text?",
+    default: true,
+    onChange: () => { Engine.show() },
+});
+settings.tooltips = true;
+Setting.save();
+
+// Pronouns
+Setting.addList("pronouns", {
+    label   : "Preferred Pronouns:",
+    list    : [
+        "he/him/his", 
+        "she/her/hers", 
+        "they/them/theirs"],
+    default : "he/him/his",
+    onChange: () => { Engine.show() },
+});
+
+// Chapter Title Names
+variables().chaptertitles = {
+    "@0": "My Twine Template",
+    "@ex": "Examples",
+};
+
+<</script>>

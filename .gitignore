@@ -1,0 +1,14 @@
+# Ignore Tagged Files
+# -*
+
+# Ignore VSCode Configuration Files
+# /.vscode
+# t3lt.twee-config.yml
+
+# Ignore Node and Electron Generated Files
+/node_modules
+package-lock.json
+/out
+
+# Ignore Things I Don't Have Permission to Share
+-notes/secretfiles/

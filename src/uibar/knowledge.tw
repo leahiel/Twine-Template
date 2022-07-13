@@ -1,0 +1,188 @@
+:: KnowledgeText [.uibar nostats] {"position":"0,950"}
+@@.dialog-header;Knowledge Base@@
+<<include K_CulpabilityTonic>>
+<<include K_Concretion>>
+<<include K_DigestiveSystems>>
+<<include K_Homunculi>>
+<<include K_Fairies>>
+<<include K_FerrousCompound>>
+<<include K_Merfolk>>
+<<include K_Minotaurs>>
+<<include K_Nurses>>
+<<include K_RoyalKnights>>
+<<include K_Sylphs>>
+<<include K_Vampires>>
+
+
+
+:: K_Template [.knowledge] {"position":"0,975"}
+<<if true>>
+    @@.knowledge;Template Matter:@@<br>
+    Lorem Ipsum about template matter.
+<</if>>
+
+
+
+:: K_Concretion [.knowledge] {"position":"0,1000"}
+<<if $kn_concretion_lv gte 1>><br>
+    @@.knowledge;Metamorphizing Concretion:@@<br>
+    It's a rock that has been melded together like concrete using the arcane arts.
+<</if>>
+<<if $ev_ingested_concretion>>
+    <<if $ev_sylph_fire>>You swallowed some down when sylphs were throwing flaming chunks of it at you<<else>>You've gone and ingested its particulates while trying to wet your throat<</if>>: You're not feeling so well anymore.
+<</if>>
+
+
+
+:: K_CulpabilityTonic [.knowledge] {"position":"0,1025"}
+<<if $kn_culpabilitytonic_lv gte 1>>
+    @@.knowledge;Culpability Tonic:@@<br>
+    A tonic that you were researching that would force it's imbibers to speak the truth.
+<</if>>
+
+
+
+:: K_DigestiveSystems [.knowledge] {"position":"0,1050"}
+<<if $kn_digestive_systems_lv gte 1>>
+    @@.knowledge;Digestive Systems:@@<br>
+    The digestive system is a very important part of your body. Composing of organs like the stomach, liver, intestines, and rectum, the digestive system is how biological beings break down their food and turn it into energy.
+    <<if $ev_hops_insertion_orgasm>>* Nurse Hops was checking your digestive system during her examination of you.<</if>>
+    <<include K_RuminantGastricSystem>><<include K_SingleGastricSystem>><<include K_MagicalGastricSystem>>
+<</if>>
+
+:: K_MagicalGastricSystem [.knowledge] {"position":"0,1075"}
+<<if $kn_magical_gastric_lv>>
+    @@.subknowledge;Magical Gastric System:@@<br>
+    Many magical creatures don't utilize the same biology as fully biological beings. Instead, they have a variety of methods to obtain energy, and not all of them require food. This section of gastric systems is really more of a category that contains many other categories like photosynthesis and tele-vigor.
+<</if>>
+
+:: K_RuminantGastricSystem [.knowledge] {"position":"0,1100"}
+<<if $kn_ruminant_gastric_lv>>
+    @@.subknowledge;Ruminant Gastric System:@@<br>
+    Common examples of ruminant animals include deer, goats, cows, horses and minotaurs. Ruminants are unique for having four "stomachs." They use these stomachs to fully digest tougher foods, like grass.
+<</if>>
+
+:: K_SingleGastricSystem [.knowledge] {"position":"0,1125"}
+<<if $kn_single_gastric_lv>>
+    @@.subknowledge;Single Gastric System:@@<br>
+    Most biological beings have a single gastric system. This is when they have a single stomach, and they're not able to easily break down more objects into foods. Humans, toads, and birds are all examples of single gastric animals.
+<</if>>
+
+
+
+:: K_Homunculi [.knowledge] {"position":"0,1150"}
+<<if $kn_homunculi_lv gte 1>>
+    @@.knowledge;Homunculus:@@<br>
+    A homunculus is merely a human who has failed on their journey to immortality.
+<</if>>
+<<if $kn_homunculi_lv gte 2>>
+    Some homunculi are victims of studious torture by esteemed wizards. These wizards are famous 
+    and many believe that they will bring immortality to the enlightened species one day.
+<</if>>
+<<if $kn_homunculi_lv gte 3>>
+    Legend has it that the man who made that metamorphizing concretion also became a homunculus.
+<</if>>
+
+
+
+:: K_Fairies [.knowledge] {"position":"0,1175"}
+<<if $kn_fairy_lv gte 1>>
+    @@.knowledge;Fairies:@@
+    Fairies are fairly well-known creatures. The ladies look like miniature humanoids with wings on their backs, but the men are indistinguishable from flowers. This hybrid of magical, plant, and animalistic features has made fairies into one of the most researched creatures. <<if $kn_fairy_lv gte 2>>In order to mate, the fairies play an intricate game. The females will flit around the petals of the males, and the males have to use their vines to catch the female. When the female is caught, she is brought into the folds of the flower, which function as a bed for her during copulation. <<if $kn_fairy_lv gte 3>>Because the men are rooted to the ground, researchers believe that the females have all the power in the relationship. The ladies have been known to simply fly away from their partner forever if they find him unsatisfactory.<</if>><</if>>
+<</if>>
+<<if $ev_fairy_metamorphosis>>
+* Since you know that you'll be retaining your humanoid shape, if you are changing into a fairy, it must be into a female fairy, not a male fairy.
+<</if>>
+
+
+
+:: K_FerrousCompound [.knowledge] {"position":"0,1200"}
+<<if $kn_ferrouscompound_lv gte 1>>
+    @@.knowledge;Ferrous Compound:@@<br>
+    A ferrous compound is an alchemical material made predominently with iron. Within the alchemy community, it's well known that magical beings tend to rust out ferrous compounds quickly, so they can't be used when mixing certain magical catalysts. <<if $kn_ferrouscompound_lv gte 2>>Due to the high availablity of iron and their lesser capabilities in Alchemy, the compound is relatively cheap.<</if>>
+<</if>>
+
+
+
+:: K_Keratin [.knowledge] {"position":"0,1225"}
+<<if true>>
+    @@.knowledge;Keratin:@@
+    The epidermis of your skin, your nails, and your hair all contain certain ratios of keratin. Keratin is also used in different ratios for things like claws or beaks. However, other creatures like iron golems contain no keratin. So if you're going through a metamorphosis, keeping track of these things can be incredibly beneficial to know if you're changing species or not.
+<</if>>
+<<if $ev_keratin_results>>
+* The results of your keratin test showed that you are unlikely to be turning into a non-biological substance.
+<</if>>
+
+
+
+:: K_Merfolk [.knowledge] {"position":"0,1250"}
+<<if $kn_merfolk_lv gte 1>>
+    @@.knowledge;Merfolk:@@<br>
+    While knowledge that the merfolk exist is common, the exact details of their nature and heirarchical society are not well known. The gap between water-breathing and air-breathing creatures is too vast a gap for proper research to be conducted.
+<</if>>
+<<if $ev_merfolk_metamorphosis>>
+* It's possible that you're turning into a <<if (settings.pronouns is "he/him/his")>>merman<<elseif settings.pronouns is "she/her/hers">>mermaid<<else>>merperson<</if>>, but the equipment required to test for this can't be found at the Tower of Miraj.
+<</if>>
+
+
+
+:: K_Minotaurs [.knowledge] {"position":"0,1275"}
+<<if $kn_minotaur_lv gte 1>>
+    @@.knowledge;Minotaur:@@<br>
+    Minotaurs are ferocious large biological beings that stand on two legs. Their top half represents a bull, and the bottom half looks like a human. Despite their reputation as fierce creatures, they mostly eat plants and are largely harmless so long as you don't roam into their territory.
+<</if>>
+
+
+
+:: K_Nurses [.knowledge] {"position":"0,1300"}
+<<if $kn_nurses>>
+    @@.knowledge;Nurses of Miraj:@@<br>
+    There are plenty of nurses paid for by the Miraj guild. After swallowing the metamorphizing concretion, you went to see the medical malformations nurse, Nurse Hops.
+    <<include K_NursesMaladies>><<include K_NursesMalformations>>
+<</if>>
+
+:: K_NursesMaladies [.knowledge] {"position":"0,1325"}
+<<if $kn_nurses_maladies>>
+    @@.subknowledge;Magical Maladies Nurse:@@<br>
+    Unlike the Magical Malformations Nurse, the Magical Maladies Nurses are simply smart enough to know when to put antiseptic cream on a wound, and when to give sugar pills. These nurses are only capable of handling the simplest of boo-boos.
+    <<if $kn_nurses_maladies_lv gte 1>> /* Potential plot line for NSFW action. */
+        Some Magical Maladies Nurses simply take up post as a Magical Maladies Nurse while they study deeper subjects on the side.
+   <</if>>
+<</if>>
+
+:: K_NursesMalformations [.knowledge] {"position":"0,1350"}
+<<if $kn_nurses_malformation>>
+    @@.subknowledge;Magical Malformations Nurse:@@<br>
+    A pinnacle of nursing science, the Magical Malformations Nurse needs to know the normal constitution of all of her patients, as well as all the common things that can go wrong. With the hundreds of species that exist, this is no easy feat. Magical Malformations Nurses are among the highest-paid and esteemed nurses in the practice.
+<</if>>
+
+
+
+:: K_RoyalKnights [.knowledge] {"position":"0,1375"}
+<<if $kn_royal_knights_lv gte 1>>
+    @@.knowledge;Royal Knights:@@<br>
+    The Royal Knights are responsible for guarding the royalty, obviously. They're known for their immaculate and erect posture. <<if $pc.penis>>Sometimes, you think your dick is a honorary member of the Royal Knights due to how hard it works.<</if>>
+<</if>>
+
+
+
+:: K_Sylphs [.knowledge] {"position":"0,1400"}
+<<if $kn_sylphs_lv gte 1>>
+    @@.knowledge;Sylphs:@@<br>
+    Sylphs are cute little creatures. Almost like fairies, but with less than half the intelligence. <<if $kn_sylphs_lv gte 2>>Sylphs are normally playful creatures that like to play pranks. They're not into malicious things like causing people pain for no reason.<</if>>
+    <<if $ev_sylph_fire>>You're not a huge fan of sylphs after they threw molten slag at you when you ignorantly lit their home on fire.<<else>>You're not a huge fan of sylphs after they threw the remains of their home all over your room.<</if>>
+<</if>>
+
+
+
+:: K_Vampires [.knowledge] {"position":"0,1425"}
+<<if $kn_vampire_lv gte 1>>
+    @@.knowledge;Vampires:@@<br>
+    You don't know much about vampires, except that they like to drink the blood of humans for nutrition and energy.
+<</if>>
+<<if $ev_vampire_metamorphosis>>
+* It's possible that you're turning into a vampire. <<if $ppl_lilac_met>>You could visit Lilac to learn more about vampires.<</if>>
+<</if>>
+<<if $ppl_lilac_met>>
+* Lilac is a very well-known vampire in the Tower of Miraj.
+<</if>>

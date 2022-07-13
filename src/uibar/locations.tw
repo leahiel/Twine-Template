@@ -1,0 +1,28 @@
+/* While support exists for these, but they are unused in this prototype game. */
+:: LocationsText [.uibar nostats] {"position":"250,950"}
+<<include "L_TowerofUrga">>
+<<include "L_GuildHall">>
+
+
+
+:: L_Template [.location annotation] {"position":"250,975"}
+<<if $loc_tmpl_disc>>
+    @@.knowledge;Template Matter:@@<br>
+    Lorem Ipsum about template matter.
+<</if>>
+
+
+
+:: L_TowerofUrga [.location] {"position":"250,1000"}
+<<if $loc_urga_disc>>
+    @@.knowledge;Tower of Urga:@@<br>
+    The tower that belonged to the damned Urga, who studied various methods of immortality.
+<</if>>
+
+
+
+:: L_GuildHall [.location] {"position":"250,1025"}
+<<if $loc_guildhall>>
+    @@.knowledge;Miraj's Guild Hall:@@<br>
+    The Miraj tower houses a variety of ?wizards, and most tend to do magical research. The administration, to fund this research, has set up a business that finds outside clients to bring money in. The clients file a task with the admins, and the admins place an advertisement on the bulletin board in the mess hall for ?wizards to peruse at their leisure. The ?wizards are free to choose which takes they take.
+<</if>>

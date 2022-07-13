@@ -1,0 +1,196 @@
+:: PassageReady [.rendering] {"position":"250,675"}
+/* Everything here is done before every passage begins rendering.
+Best for defining functions and whatnot. Or so I thought, but it 
+doesn't seem to work that way. */
+<<script>>
+    settingsHandler();
+
+    /* Reset if these already exist. If one exists, then the others must exist. */
+    function settingsHandler() {
+        if (Template.has("he")) {
+            Template.delete("he");
+            Template.delete("him");
+            Template.delete("his");
+            Template.delete("Mr");
+            Template.delete("Mister");
+            Template.delete("wizard");
+            Template.delete("wizards");
+            Template.delete("boy");
+        };
+
+        switch(settings.pronouns) {
+        case "he/him/his":
+            Template.add("he", "he");
+            Template.add("him", "him");
+            Template.add("his", "his");
+            Template.add("Mr", "Mr.");
+            Template.add("Mister", "Mister");
+            Template.add("wizard", "wizard");
+            Template.add("wizards", "wizards");
+            Template.add("boy", "boy");
+            break;
+        case "she/her/hers":
+            Template.add("he", "she");
+            Template.add("him", "her");
+            Template.add("his", "her");
+            Template.add("Mr", "Miss");
+            Template.add("Mister", "Miss");
+            Template.add("wizard", "witch");
+            Template.add("wizards", "witches");
+            Template.add("boy", "girl");
+            break;
+        default:
+        /* Assume "they/them/theirs": */
+            Template.add("he", "they");
+            Template.add("him", "them");
+            Template.add("his", "their");
+            Template.add("Mr", "M.");
+            Template.add("Mister", "Gentleperson");
+            Template.add("wizard", "wizard");
+            Template.add("wizards", "wizards");
+            Template.add("boy", "kid");
+        }
+    }
+<</script>>
+
+
+
+:: PassageHeader [.rendering] {"position":"250,700"}
+/* Everything here is rendered at the start of every passage rendering. 
+It's intended for actual rendering stuff. */
+<div id="chapterheader">Chapter Header Text</div>
+<span id="passagetitleheader">Passage Header Text</span>
+
+
+
+:: PassageFooter [.rendering] {"position":"250,725"}
+/* Everything here is rendered at the end of every passage rendering.
+It's intended for actual rendering stuff. */
+
+
+
+:: PassageDone [.rendering] {"position":"250,750"}
+/* Everything here is done after each passage is rendered. Best for 
+event handlers and the like. */
+<<script>>
+/* Add Fancy Chapter Header */
+let curPsgTitle = State.active.title;
+let curPsg = Story.get(curPsgTitle);
+let curPsgChapter = "Unknown Chapter";
+
+Object.keys(variables().chaptertitles).forEach(key => {
+  if (curPsg.tags.includes(key)) {
+    curPsgChapter = variables().chaptertitles[key];
+    return;
+  }
+});
+
+$('div#chapterheader').text(curPsgChapter);
+$('span#passagetitleheader').text(curPsgTitle);
+
+/* Create an event handler that checks every time an element is added.
+If that element is a <<link>>, check if the passage tags it links 
+to. If they are on the fetish lists, disable them or flag them for
+warning. */
+const targetNode = document.getElementById('story');
+const config = {
+  childList: true,
+  subtree: true
+};
+
+const callback = function(mutationList, observer) {
+  for (const mutation of mutationList) {
+    /* true if new element has been added. */
+    if (mutation.type === 'childList') {
+
+      /* Get every link and put them in an array. */
+      let linkarr = $('.macro-link').toArray();
+
+      linkarr.forEach(link => {
+        if (!$(link).hasClass('fet-disabled') && !$(link).hasClass('fet-warning')) {
+
+          let psgTitle = $(link).attr("data-passage");
+
+          /* Check if we have a title. If we have none, then the current 
+          passage isn't fully rendered yet. */
+          if (typeof psgTitle !== "undefined") {
+            let psgTags = Story.get(psgTitle).tags;
+
+            /* Check Disables */
+            psgTags.forEach(function(tag) {
+              if (variables().ft_disable.includes(tag)) {
+                /* This will add the .fet-disabled class to the link, 
+                will make it appear as though the link never existed at 
+                all, so the user won't know what they're missing out on 
+                and therefore can't feel like they're missing anything. 
+                */
+                $(link).addClass("fet-disabled");
+              }
+            });
+
+            /* Check Warnings */
+            psgTags.forEach(function(tag) {
+              if (variables().ft_warning.includes(tag)) {
+                  /* By adding the class, we'll be able to highlight the
+                  fact that this fetish was checkmarked to show a 
+                  warning. */
+                  $(link).addClass("fet-warning");
+
+                  /* However, we need to know which fetishes we're warning
+                  the user about, so we add the qualifying tags to the 
+                  'fet-warning' attribute. */
+                  if (typeof $(link).attr('fet-warning') === "undefined") {
+                      /* If 'fet-warning' doesn't exist, create it and add 
+                      the tag. */
+                      $(link).attr('fet-warning', tag);
+                  } else {
+                      /* If 'fet-warning' exists, store current value [tags]
+                      and add tags and current value back to it. We have to 
+                      do this because .attr(attribute, value) overwrites the
+                      current value of the attribute. */
+                      let tmp = " " + $(link).attr('fet-warning');
+                      $(link).attr('fet-warning', tag + tmp);
+                  }
+              }
+              if ($(link).attr('fet-warning') != undefined) {
+                let fetarr = $(link).attr('fet-warning').split(' ');
+                fetarr =  [...new Set(fetarr)];
+                $(link).append("<br><span class='warning-link'>Warning: This link contains the following content: " + fetarr + "</span>");
+              }
+              
+
+            
+
+
+
+              /* This may make us unable to check for changes on link replaces. */
+              observer.disconnect();
+            });
+          }
+
+
+
+          
+        }
+
+
+        
+      });
+    }
+  }
+};
+
+/* Create an observer instance linked to the callback function */
+const observer = new MutationObserver(callback);
+
+/* Start observing the target node for configured mutations */
+observer.observe(targetNode, config);
+
+/* Initalize tooltips. */
+$(document).ready(function() {
+  $('.tooltip').tooltipster({
+    contentCloning: true,
+    theme: 'tooltipster-custom'
+  }); 
+});
+<</script>>
