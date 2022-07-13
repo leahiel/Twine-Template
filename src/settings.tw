@@ -5,7 +5,7 @@ My Twine Story
 
 :: StoryData [.initialize] {"position":"0,775"}
 {
-	"ifid": "AB138CAA-00A2-4796-831A-3F5B5DC105E9",
+	"ifid": "23434251-6794-4218-A748-08DC3C51EE80",
     "format": "SugarCube",
     "format-version": "2.36.1"
 }
@@ -223,6 +223,13 @@ add_tooltip("imbiber", "TT_Imbiber");
 //     default: true
 // })
 
+// Toggle for Background Images.
+Setting.addToggle("bgimg", {
+    label: "Show Background Images?",
+    default: true
+});
+settings.bgimg = true;
+
 // Toggle option for tooltips.
 Setting.addToggle("tooltips", {
     label: "Show tooltips on important text?",
@@ -230,6 +237,7 @@ Setting.addToggle("tooltips", {
     onChange: () => { Engine.show() },
 });
 settings.tooltips = true;
+
 Setting.save();
 
 // Pronouns

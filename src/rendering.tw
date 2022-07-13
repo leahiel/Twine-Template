@@ -73,6 +73,11 @@ It's intended for actual rendering stuff. */
 /* Everything here is done after each passage is rendered. Best for 
 event handlers and the like. */
 <<script>>
+/* Check if we want background images, remove them if we don't. */
+if (!settings.bgimg) {
+  $('body').css("background-image", "none");
+}
+
 /* Add Fancy Chapter Header */
 let curPsgTitle = State.active.title;
 let curPsg = Story.get(curPsgTitle);

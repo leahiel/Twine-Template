@@ -1,0 +1,9 @@
+body[data-tags~="start"] {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url("src/assets/img/desolatecity.jpeg");
+  background-size: cover;
+  height: 100vh;
+}
+
+body {
+    text-shadow: 2px 2px 2px black;
+}
