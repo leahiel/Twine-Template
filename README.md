@@ -9,7 +9,7 @@ This repository exists to give aspiring authors an idea of how to put together a
 The best way to show an example of a workflow is to simply create a project using it. This has the added benefit of showing novice users how to use the additional functionality that Twine provides. However, GitHub doesn't allow people to publically share NSFW works for this purpose, so I've made this template instead.
 
 This template has been used to make the following games:
-<iframe frameborder="0" src="https://itch.io/embed/1610854?dark=true" width="552" height="167"><a href="https://leahiel.itch.io/alchemist">The Alchemist by LeahPeach</a></iframe>
+[![See a game made with this template:](DOCUMENTATION/img/alch-itch-img.JPG)](https://leahiel.itch.io/alchemist)
 
 ## Cloning this Repository
 To clone this repository, you can run `git clone https://github.com/leahiel/Twine-Template` in a terminal such as command prompt or your IDE's terminal to populate that directory with these files. This isn't enough to run this repository, you also have to install Twine 2, SugarCube, and Tweego.
