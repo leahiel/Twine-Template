@@ -15,6 +15,7 @@ npx electron-packager --platform=mas ./     <!-- Mac, requires giving money to a
 
 
 # Butler Commands
+<!-- Not Yet Implemented at all. -->
 butler upgrade
 butlet login
 
