@@ -1,0 +1,17 @@
+https://www.teuton.org/~stranger/clickableimagemapsintwine
+
+SVG maps are usually just better though:
+
+https://parall.ax/blog/view/2985/tutorial-creating-an-interactive-svg-map
+
+
+
+Cycy
+if you want an SVG image map, i got a potato ez method around, lemme fetch:
+1. import image into vector program,
+2. resize canvas to be same aspect ratio (i usually just do same size as image)
+3. make the interactive areas with vector art tools
+4. remove the image and export the SVG
+5. copy pasta the SVG source into passage, add <image> tag with href as the path to the image
+6. style them regions or do JS stuff with them
+ez pz lmn sqzy responsive snazzy image map

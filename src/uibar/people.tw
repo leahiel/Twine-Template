@@ -1,0 +1,32 @@
+:: PeopleText [.uibar nostats] {"position":"125,950"}
+@@.dialog-header;People@@
+<<include [[P_Orick]]>>
+
+
+
+:: P_Template [.people] {"position":"125,975"}
+<<if $ppl_tmpl_met>>
+    @@.knowledge;Template Matter:@@<br>
+    Lorem Ipsum about template matter.
+<</if>>
+
+
+
+:: P_Orick [.people] {"position":"125,1025"}
+<<if $ppl_orick_met>>
+    @@.knowledge;Orick:@@<br>
+    Orick has lent you his carriage in return for two lunging beetles. He wanred you not to betray him.
+<<if $meta.ppl_orick_urga>>
+    /* THIS VAIARABLE IS NEVER SET UP ON THE SERVER. */
+    At one point in time, this character went Tower Diving in the Tower of Urga for some unknown components.
+<</if>>
+<<if $meta.ppl_orick_agent>>
+    Orick is an Agent of God, a being who is trying to stop these "Sevens" from "fulfilling their journey." He can apparently see the future.
+<</if>>
+<<if $meta.ppl_sil_orick_relationship>>
+    Orick controls Sil like a puppet, using her to fulfill his wishes.
+<</if>>
+<<if $meta.ppl_orick_favored_by_gods>>
+    Orick was rumored to be favored by the gods.
+<</if>>
+<</if>>

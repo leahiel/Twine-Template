@@ -1,0 +1,16 @@
+sugarcube-2:
+  # We don't want t3lt to flag our custom macros as not existing. It gets annoying.
+  macros:
+    # Disable.js v1.0.0, by chapel, for SugarCube 2.
+    # Disables inputs.
+    disable:
+      name: disable
+      container: true
+    tt:
+      # My custom macro for tooltips. 
+      name: tooltiptext
+      container: true
+    setmeta:
+      # My custom macro for setting meta variables. 
+      name: setmeta
+      container: false

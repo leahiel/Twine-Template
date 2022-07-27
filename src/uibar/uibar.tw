@@ -1,0 +1,111 @@
+:: StoryBanner [.uibar] {"position":"0,800"}
+/* This appears in the UI bar below the back/neck buttons, but above 
+the story title. Perfect for a banner image! */
+
+
+:: StoryMenu [.uibar] {"position":"0,825"}
+/* This adds elements to the UI bar. */
+
+/* All of our elements here are in a dialog so that when the user is 
+done with it, they can get right back to the story. There's no back 
+button or extra link needed. */
+
+/* Dialogs can change story variables, but they won't change on the 
+current [non-dialog] passage, unless it calls:
+  [Go To and Render Passage]  Engine.play("Passage") 
+  [Re-Render Current Passage] Engine.show() */
+
+<<if $ft_knowledge>>
+    <<link "Knowledge Base">>
+        <<script>>
+            Dialog.setup();
+            Dialog.wiki(Story.get("KnowledgeText").processText());
+            Dialog.open();
+        <</script>>
+    <</link>>
+<</if>>
+
+<<if $ft_people>>
+    <<link "People">>
+        <<script>>
+            Dialog.setup();
+            Dialog.wiki(Story.get("PeopleText").processText());
+            Dialog.open();
+        <</script>>
+    <</link>>
+<</if>>
+
+<<link "Credits">>
+    <<script>>
+        Dialog.setup();
+        Dialog.wiki(Story.get("CreditsText").processText());
+        Dialog.open();
+    <</script>>
+<</link>>
+
+<<link "Disable Content">>
+    <<script>>
+        Dialog.setup();
+        Dialog.wiki(Story.get("FetishPicker").processText());
+        Dialog.open();
+    <</script>>
+<</link>>
+
+<<if $ft_dev_ending>>
+    <<link "Dev Message">>
+        <<script>>
+            Dialog.setup();
+            Dialog.wiki(Story.get("Debug-ending").processText());
+            Dialog.open();
+        <</script>>
+    <</link>>
+<</if>>
+
+<<if !State.variables.user.logged_in>>
+    <<link "Connect to Server">>
+        <<script>>
+        /* FIXME SERVER: We shouldn't open the window directly, rather we should open a dialogue box that tells users things, that has a link with which they can click to open the window. */
+            window.open(`https://itch.io/user/oauth?client_id=9a5a87634b363c3ce3908f94c8767e1b&scope=profile%3Ame&response_type=token&redirect_uri=https%3A%2F%2Fmetadb-a53ef.web.app%2Fitch_oauth.html&state=${recall('user-uuid')}&`, "_blank");
+        <</script>>
+    <</link>>
+<</if>>
+
+<<if State.variables.user.logged_in>>
+    <<link "Connected to Server">>
+    <</link>>
+<</if>>
+
+/* Dev Mode */
+<<if $dev_test>>
+    <<link "Dev Options">>
+        <<script>>
+            Dialog.setup();
+            Dialog.wiki(Story.get("DevOptionsText").processText());
+            Dialog.open();
+        <</script>>
+    <</link>>
+    <<script>>
+    /* HACK: What a doozy.
+    I just want to make the UI dev button a flashy color, but there
+    is no special id or anything for a CSS selector to latch onto.
+    (:last-child doesn't work because if the button doesn't exist,
+    it'll latch onto the next highest button.) If you try to add one, 
+    the SugarCube parser isn't able to understand what you're trying 
+    to do. Therefore, I wrote this to inject a <style> tag with the 
+    CSS I wanted into the HTML. This'll only ever show during test 
+    mode, so I'm not too worried about anything regarding this code. 
+    */
+
+    /* To the third party person reading this comment, these are the 
+    kind of hacks that make your code messy. Try to limit them if
+    you can. */
+    let head = document.head;
+    let style = document.createElement('style');
+    let css = '#menu-story li:last-child{width:90%;margin-left:auto;margin-right:auto;border-radius:12px;background:hsl(0, 68%, 48%)}#menu-story li:last-child a:before{content:"\\e838\\00a0";font-family:tme-fa-icons!important;}';
+
+    head.appendChild(style);
+
+    style.type = 'text/css';
+    style.appendChild(document.createTextNode(css));
+    <</script>>
+<</if>>

@@ -1,0 +1,213 @@
+:: PassageReady [.rendering] {"position":"125,675"}
+/* Everything here is done before every passage begins rendering.
+Best for checking variables and whatnot. */
+<<script>>
+/* Set State.variables.ft_people = true if any variable ending in _met is true. */
+if (!State.variables.ft_people) {
+  for (let key in State.variables) {
+    if (key.includes("ppl_") && key.includes("_met") && State.variables[key] === true) {
+        State.variables.ft_people = true;
+    }
+  }
+}
+
+/* Set State.variables.ft_knowledge = true if any variable ending in _lv is true. */
+if (!State.variables.ft_knowledge) {
+  for (let key in State.variables) {
+    if (key.includes("kn_") && key.includes("_lv") && State.variables[key] == true) {
+        /* 0 is falsy, 1+ is truthy. That's why the condition is == and not ===. */
+        State.variables.ft_knowledge = true;
+    }
+  }
+}
+
+
+settingsHandler();
+
+/* Reset if these already exist. If one exists, then the others must exist. */
+function settingsHandler() {
+  if (Template.has("he")) {
+    Template.delete("he");
+    Template.delete("him");
+    Template.delete("his");
+    Template.delete("Mr");
+    Template.delete("Mister");
+    Template.delete("wizard");
+    Template.delete("wizards");
+    Template.delete("boy");
+  }
+
+  switch (settings.pronouns) {
+    case "he/him/his":
+      Template.add("he", "he");
+      Template.add("him", "him");
+      Template.add("his", "his");
+      Template.add("Mr", "Mr.");
+      Template.add("Mister", "Mister");
+      Template.add("wizard", "wizard");
+      Template.add("wizards", "wizards");
+      Template.add("boy", "boy");
+      break;
+    case "she/her/hers":
+      Template.add("he", "she");
+      Template.add("him", "her");
+      Template.add("his", "her");
+      Template.add("Mr", "Miss");
+      Template.add("Mister", "Miss");
+      Template.add("wizard", "witch");
+      Template.add("wizards", "witches");
+      Template.add("boy", "girl");
+      break;
+    default:
+      /* Assume "they/them/theirs": */
+      Template.add("he", "they");
+      Template.add("him", "them");
+      Template.add("his", "their");
+      Template.add("Mr", "M.");
+      Template.add("Mister", "Gentleperson");
+      Template.add("wizard", "wizard");
+      Template.add("wizards", "wizards");
+      Template.add("boy", "kid");
+  }
+}
+<</script>>
+
+
+
+:: PassageHeader [.rendering] {"position":"125,700"}
+/* Everything here is rendered at the start of every passage rendering. 
+It's intended for actual rendering stuff. */
+<div id="chapterheader">Chapter Header Text</div>
+<span id="passagetitleheader">Passage Header Text</span>
+
+
+
+:: PassageFooter [.rendering] {"position":"125,725"}
+/* Everything here is rendered at the end of every passage rendering.
+It's intended for actual rendering stuff. */
+
+
+
+:: PassageDone [.rendering] {"position":"125,750"}
+/* Everything here is done after each passage is rendered. Best for 
+event handlers and the like. */
+<<script>>
+
+/* Check if we want background images, remove them if we don't. */
+if (!settings.bgimg) {
+  $('body').css("background-image", "none");
+}
+
+
+
+/* Add Fancy Chapter Header */
+// let curPsgTitle = State.active.title;
+let curPsgTitle = passage();
+let curPsg = Story.get(curPsgTitle);
+let curPsgChapter = "Unknown Chapter";
+
+// Chapter Title Names
+let chaptertitles = {
+    "@0": "The Field Biologist",
+    "@1": "The Newbie and The Decision",
+    "@2": "Camping",
+    "@3": "Beetles",
+    "@4": "Dev Message",
+};
+
+Object.keys(chaptertitles).forEach(key => {
+  /* FIXME: Add ability to check for an alternative title. For instance, if a possible has @1 but T2, then T2 should take precedence over @1. This should be done programmatically, and not be based on which tag is processed last. Once that's done, actually add in the new titles, like "The Departure" and whatnot. */
+  if (curPsg.tags.includes(key)) {
+    curPsgChapter = chaptertitles[key];
+    return;
+  }
+});
+
+$('div#chapterheader').text(curPsgChapter);
+$('span#passagetitleheader').text(curPsgTitle);
+
+
+
+/* Create an event handler that checks every time an element is added.
+If that element is a <<link>>, check if the passage tags it links 
+to. If they are on the fetish lists, disable them or flag them for
+a warning. */
+const targetNode = document.getElementById('story');
+const config = {
+  childList: true,
+  subtree: true
+};
+
+const callback = function(mutationList, observer) {
+  for (const mutation of mutationList) {
+    /* Only run for new added elements. */
+    if (mutation.type !== 'childList') return;
+
+    /* Get every link and put them in an array. */
+    let linkarr = $('.macro-link').toArray();
+    linkarr.forEach(link => {
+
+      if (!$(link).hasClass('fet-disabled') && !$(link).hasClass('fet-warning')) {
+        let psgTitle = $(link).attr("data-passage");
+
+        /* Ensure we have a title, and rendering has finished. */
+        if (typeof psgTitle !== "string") return;
+
+        let psgTags = Story.get(psgTitle).tags;
+
+        /* Check Disables */
+        psgTags.forEach(function(tag) {
+          if (State.variables.ft_disable.includes(tag)) {
+            /* Adding the .fet-disabled class will add the css rule
+            "display: none", hiding the element. */
+            $(link).addClass("fet-disabled");
+          }
+        });
+
+        /* Check Warnings */
+        psgTags.forEach(function(tag) {
+          if (State.variables.ft_warning.includes(tag)) {
+              /* Adding the .fet-warning class will add the css rule
+              some css and allow us to show warnings. */
+              $(link).addClass("fet-warning");
+              
+              /* Add qualifying tags to the 'fet-warning' attribute so
+              we know which fetishes we're warning the user about. */
+              if (typeof $(link).attr('fet-warning') === "undefined") {
+                  $(link).attr('fet-warning', tag);
+              } else {
+                  let tmp = " " + $(link).attr('fet-warning');
+                  $(link).attr('fet-warning', tag + tmp);
+              }
+          }
+
+          if ($(link).attr('fet-warning') != undefined) {
+            let fetarr = $(link).attr('fet-warning').split(' ');
+            fetarr =  [...new Set(fetarr)];
+            $(link).append("<br><span class='warning-link'>Warning: This link contains the following content: " + fetarr + "</span>");
+          }
+          
+          /* WARNING: This may make us unable to check for changes on link replace. */
+          observer.disconnect();
+          
+        });
+      }
+    });
+  }
+};
+
+/* Create an observer instance linked to the callback function */
+const observer = new MutationObserver(callback);
+
+/* Start observing the target node for configured mutations */
+observer.observe(targetNode, config);
+
+
+/* Initalize tooltips. */
+$(document).ready(function() {
+  $('.tooltip').tooltipster({
+    contentCloning: true,
+    theme: 'tooltipster-custom'
+  }); 
+});
+<</script>>

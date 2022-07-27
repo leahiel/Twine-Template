@@ -1,0 +1,72 @@
+:: FetishPicker [.initialize nostats] {"position":"375,700"}
+@@.dialog-header;Disable Content@@
+Please select which fetishes you would like to encounter.
+
+@@.warning;<br>If you set a fetish to "Warn", passages that contain that fetish will have a warning.@@
+@@.warning;<br>If you set a fetish to "Disable", you'll never know that you even missed an option.@@
+
+<span class="row">
+<div class="column">
+@@.fetishtitle;GitHub ToS@@
+<br>@@.subtext;So GitHub doesn't allow NSFW information.@@
+<br><label><<checkbox "_warn-fet1" false true autocheck>> Warn</label>
+<br><label><<checkbox "_disable-fet1" false true autocheck>> Disable</label>
+<br>
+<br>@@.fetishtitle;Censored@@
+<br>@@.subtext;Therefore, I've replaced all the text here for you.@@
+<br><label><<checkbox "_warn-fet2" false true autocheck>> Warn</label>
+<br><label><<checkbox "_disable-fet2" false true autocheck>> Disable</label>
+
+</div>
+<div class="column">
+@@.fetishtitle;Else@@
+<br>@@.subtext;Otherwise, you wouldn't even be able to see it!@@
+<br><label><<checkbox "_warn-fet3" false true autocheck>> Warn</label>
+<br><label><<checkbox "_disable-fet3" false true autocheck>> Disable</label>
+<br>
+<br>@@.fetishtitle;No Fun@@
+<br>@@.subtext;And that just wouldn't help anyone..@@
+<br>@@.warning;This content is too minimal to warn for.@@
+<br><<disable>><label><<checkbox "_warn-fet4" false true autocheck>> Warn</label><</disable>>
+<br><label><<checkbox "_disable-fet4" false true autocheck>> Disable</label>
+
+</div>
+</span>
+
+<<done>>
+	/* Run an event handler that refreshes the passage when an option changes. */
+	<<run 
+        checkboxHandler("fet1");
+        checkboxHandler("fet2");
+        checkboxHandler("fet3");
+        checkboxHandler("fet4");
+
+        function checkboxHandler(fetish) {
+            let warn_fetish = "input#checkbox--warn-" + fetish;
+            $(warn_fetish).on("click", function() {
+                if (document.querySelector(warn_fetish).checked) {
+                    /* Ensure the fetish isn't already in the array. */
+                    if (!variables().ft_warning.includes(fetish)) {
+                        variables().ft_warning.push(fetish);
+                    } 
+                } else {
+                    variables().ft_warning = variables().ft_warning.filter(v => v !== fetish); 
+                }
+			    Engine.show();
+            });
+
+            let disable_fetish = "input#checkbox--disable-" + fetish;
+            $(disable_fetish).on("click", function() {
+                if (document.querySelector(disable_fetish).checked) {
+                    /* Ensure the fetish isn't already in the array. */
+                    if (!variables().ft_disable.includes(fetish)) {
+                        variables().ft_disable.push(fetish);
+                    } 
+                } else {
+                    variables().ft_disable = variables().ft_disable.filter(v => v !== fetish); 
+                }
+			    Engine.show();
+            });
+        };
+	>>
+<</done>>

@@ -1,0 +1,44 @@
+:: Start [@0 start nostats] {"position":"25,25"}
+/* Banner Image Here, I guess */
+<<set _pronouns to "">>
+
+<h3>This is a template to show how I've set up my stories for Twine, using Tweego and SugarCube. See 
+<<link Credits>>
+	<<script>>
+	    Dialog.setup();
+	    Dialog.wiki(Story.get("CreditsText").processText());
+	    Dialog.open();
+	<</script>>
+<</link>> for more information.</h3>
+
+<br>
+<br>
+<h4><label>Name thyself:   <<textbox "$pc_name" "Leah">></label></h4>
+<br> 
+<label>Which set of pronouns do you prefer? 
+	/* FIXME: Make the variable value different from these visible values. */
+	<<cycle "_pronouns" "autoselect">>
+		<<option "he/him/his">>
+		<<option "she/her/hers">>
+		<<option "they/them/theirs">>
+	<</cycle>>.
+</label>
+<br><br>
+<h4>Your body has:</h4>
+<br><label><<checkbox "$pc.penis" false true checked>> An arm.</label>
+<br><label><<checkbox "$pc.breasts" false true autocheck>> Two lumps.</label>
+<br><label><<checkbox "$pc.vagina" false true autocheck>> A hole.</label>
+<br>
+<br><<link [[Time to move on.|Link-Replace-Prepend]]>><</link>>
+
+<<done>>
+	<<script>>
+		settings.pronouns = "he/him/his";
+
+		/* Update the settings variable every time it is clicked. */
+		$("a#cycle--pronouns").on("click", () => {
+			settings.pronouns = State.temporary.pronouns;
+			Setting.save();
+		});
+	<</script>>
+<</done>>
