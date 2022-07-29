@@ -72,10 +72,6 @@ function add_tooltip (macroname, passage, metaname = false) {
 */
 
 /* DEV FEATURES */
-/* HACK: For some reason, the StoryMenu isn't able to comprehend the 
-Config.debug value, so this is required. */
-State.variables.dev_test = Config.debug;
-
 /* TODO: These variables don't update when added to the script, reload 
 the script, and then refresh. This is fine for most things, but 
 when things are added here, I want them to be initialized on the 
@@ -95,7 +91,7 @@ State.variables.meta.psgsthatsentdb = [];
 
 /* Useful if you have server-side stuff that you're doing. */
 importScripts(["src/assets/js/uuid.min.js", "src/assets/js/game_ssr.js"])
-    /* HACK: You have to manually copy over the game_ssr.js webpack. A symlink doesn't work for some reason. */
+    /* NOTE: You have to manually copy over the game_ssr.js webpack. A symlink doesn't work for some reason. This is done automatically in the build.bat. */
     /* Strictly speaking, I don't need to import the above, but they give a promise and I have to have them loaded to do things, so... */
     .then(() => {
         /* Ensure we are logged in every time. */

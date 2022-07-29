@@ -35,7 +35,7 @@ Macro.add("setmeta", {
         // so wait 5 seconds and try again. If it doesn't work then,
         // there is probably a good reason for it, e.g. they're just
         // not logged in at all.
-        // FIXME: Perhaps use time() to determine how long the page has been rendered.
+        // XXX: Perhaps use time() to determine how long the page has been rendered.
         // Or even, use an async method to determine when the Engine is done rendering.
         setTimeout(() => {
           if (State.variables.user.logged_in) {

@@ -1,5 +1,6 @@
 :: Start [@0 start nostats] {"position":"400,300"}
-/* Banner Image Here, I guess */
+<<bg "src/assets/img/mangroves.jpeg" 0.70>>
+
 <<set _pronouns to "">>
 
 <h3>This is a template to show how I've set up my stories for Twine, using Tweego and SugarCube. See 

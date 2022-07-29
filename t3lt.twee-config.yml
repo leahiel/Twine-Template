@@ -11,6 +11,10 @@ sugarcube-2:
       name: tooltiptext
       container: true
     setmeta:
-      # My custom macro for setting meta variables. 
+      # My custom macro to set meta variables with the server. 
       name: setmeta
+      container: false
+    bg:
+      # My custom macro to set HTML backgrounds
+      name: bg
       container: false
