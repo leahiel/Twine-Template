@@ -193,7 +193,7 @@ input[type=text] {
   background-color: rgb(25, 25, 25);
   box-shadow: 0 2px 8px rgb(0 0 0 / 50%);
   border-radius: 20px;
-  padding: 1.5rem 3rem;
+  padding: 1.5rem 2rem;
 }
 
 #databaseInfoTab {
@@ -224,7 +224,6 @@ input[type=text] {
 }
 
 #settingTabs li {
-  display: inline-block; 
   float: left;
   
   height: 4vh;
@@ -396,7 +395,6 @@ input[type=text] {
 }
 
 #storyTabs li { 
-  display: inline-block;
   float: right;
   padding: 1rem 1.25rem 1rem .75rem;
 
@@ -572,6 +570,7 @@ input[type=text] {
   transition: var(--chapter-text-transition);
 
   text-align: center;
+  line-height: 3rem;
 }
 
 #chapterheader:before {
@@ -581,6 +580,7 @@ input[type=text] {
   top: 38%;
   right: 105%;
 
+  /* TODO: This is totally in the wrong place now lmao. */
   content: "chapter: ";
 
   font-size: 1rem;
@@ -600,11 +600,11 @@ input[type=text] {
   display: block;
   opacity: 0;
 
-  margin-top: -0.5rem;
   margin-bottom: 0.7rem;
 
   color: rgb(70, 70, 70);
   text-align: center;
+  line-height: 1.5rem;
 
   transition: var(--chapter-text-transition);
 }

@@ -76,7 +76,7 @@ $("li#savesTab").click(() => UI.saves());
 :: uiRestart [.ui nostats]
 🔁
 <<script>>
-$("li#restartTab").click(() => {Engine.restart()});
+$("li#restartTab").click(() => {UI.restart()});
 <</script>>
 
 :: uiCredits [.ui nostats]
@@ -92,11 +92,15 @@ $("li#creditsTab").click(() => {
 :: uiDev [.ui nostats]
 🛠️
 <<script>>
-$("li#devTab").click(() => {
-    Dialog.setup();
-    Dialog.wiki(Story.get('DevOptionsText').processText());
-    Dialog.open();
-});
+if (Config.debug) {
+    $("li#devTab").click(() => {
+        Dialog.setup();
+        Dialog.wiki(Story.get('DevOptionsText').processText());
+        Dialog.open();
+    });
+} else {
+    $("li#devTab").css("display", "none");
+}
 <</script>>
 
 :: uiKnowledge [.ui nostats]
