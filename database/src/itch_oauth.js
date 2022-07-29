@@ -6,8 +6,6 @@ import {
   setDoc
 } from "firebase/firestore/lite";
 
-// TODO: Update security rules  https://console.firebase.google.com/u/0/project/metadb-a53ef/firestore/rules
-
 const firebaseConfig = {
   apiKey: "AIzaSyC9v0IxCIpvte0fqrvvi3YPhj5_Aj-FfU8",
   authDomain: "metadb-a53ef.firebaseapp.com",

@@ -28,6 +28,7 @@ Macro.add("bg", {
         console.log(sheet)
         // If we just keep inserting more rules into the first place, we'll be in trouble.
         // XXX: Surely there's an issue with this. I'm deleting whatever is at 0 before making sure it's my code...
+        // Just gotta find the future bug first...
         sheet.deleteRule(0);
         sheet.insertRule(`
             html {

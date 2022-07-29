@@ -5,7 +5,7 @@
 # /.vscode
 # t3lt.twee-config.yml
 
-# Ignore Node and Electron Generated Files
+# Ignore Node Generated Files
 **/node_modules
 package-lock.json
 

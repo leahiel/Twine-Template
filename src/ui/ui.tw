@@ -156,7 +156,3 @@ $(output).wiki(`You're reading <span style="text-decoration:underline">${Story.t
 <br><br>
 Interested in more fantasy smut? Find my other games at <a href="https://leahiel.itch.io/" target="_blank" rel="noreferrer noopener">Itch.io</a>.`);
 <</script>>
-
-/* TODO UI:
-Make sure tooltips are still good to go.
-*/

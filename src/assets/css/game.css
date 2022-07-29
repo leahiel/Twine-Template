@@ -205,12 +205,12 @@ input[type=text] {
 
 #databaseInfoTab {
   position: fixed;
-  left: 1rem;
+  left: 10vw;
   top: -1rem;
 
   padding: 1.25rem .75rem 0rem;
 
-  background-color: rgb(25, 25, 25);
+  background-color: hsl(0, 0%, 15%);
   box-shadow: 0 2px 8px rgb(0 0 0 / 50%);
   border-radius: 12px;
 
@@ -241,7 +241,7 @@ input[type=text] {
   box-shadow: 0 2px 8px rgb(0 0 0 / 50%);
   border-radius: 20px;
 
-  background-color: rgb(25, 25, 25);
+  background-color: hsl(0, 0%, 15%);
   
   line-height: 4vh;
   font-size: 2vh;
@@ -251,123 +251,48 @@ input[type=text] {
   cursor: pointer;
 }
 
-#settingTabs li#backwardTab:before {
+#settingTabs li:before {
   opacity: 0;
   visibility: hidden;
   font-size: 0vw;
-  content: "Back ";
 
   transition: var(--tabTransition);
 }
 
-#settingTabs li#backwardTab:hover:before {
+#settingTabs li:hover:before {
   opacity: 1;
   visibility: visible;
   font-size: inherit;
 
   transition: var(--tabTransition);
+}
+
+#settingTabs li#backwardTab:before {
+  content: "Back ";
 }
 
 #settingTabs li#forwardTab:before {
-  opacity: 0;
-  visibility: hidden;
-  font-size: 0vw;
   content: "Forward ";
-
-  transition: var(--tabTransition);
-}
-
-#settingTabs li#forwardTab:hover:before {
-  opacity: 1;
-  visibility: visible;
-  font-size: inherit;
-
-  transition: var(--tabTransition);
 }
 
 #settingTabs li#settingsTab:before {
-  opacity: 0;
-  visibility: hidden;
-  font-size: 0vw;
   content: "Settings ";
-
-  transition: var(--tabTransition);
-}
-
-#settingTabs li#settingsTab:hover:before {
-  opacity: 1;
-  visibility: visible;
-  font-size: inherit;
-
-  transition: var(--tabTransition);
 }
 
 #settingTabs li#disableContentsTab:before {
-  opacity: 0;
-  visibility: hidden;
-  font-size: 0vw;
   content: "Disable Content ";
-
-  transition: var(--tabTransition);
-}
-
-#settingTabs li#disableContentsTab:hover:before {
-  opacity: 1;
-  visibility: visible;
-  font-size: inherit;
-
-  transition: var(--tabTransition);
 }
 
 #settingTabs li#savesTab:before {
-  opacity: 0;
-  visibility: hidden;
-  font-size: 0vw;
   content: "Saves ";
-
-  transition: var(--tabTransition);
-}
-
-#settingTabs li#savesTab:hover:before {
-  opacity: 1;
-  visibility: visible;
-  font-size: inherit;
-
-  transition: var(--tabTransition);
 }
 
 #settingTabs li#restartTab:before {
-  opacity: 0;
-  visibility: hidden;
-  font-size: 0vw;
   content: "Restart ";
-
-  transition: var(--tabTransition);
-}
-
-#settingTabs li#restartTab:hover:before {
-  opacity: 1;
-  visibility: visible;
-  font-size: inherit;
-
-  transition: var(--tabTransition);
 }
 
 #settingTabs li#creditsTab:before {
-  opacity: 0;
-  visibility: hidden;
-  font-size: 0vw;
   content: "Credits ";
-
-  transition: var(--tabTransition);
-}
-
-#settingTabs li#creditsTab:hover:before {
-  opacity: 1;
-  visibility: visible;
-  font-size: inherit;
-
-  transition: var(--tabTransition);
 }
 
 #settingTabs li#devTab {
@@ -375,20 +300,7 @@ input[type=text] {
 }
 
 #settingTabs li#devTab:before {
-  opacity: 0;
-  visibility: hidden;
-  font-size: 0vw;
   content: "Dev Menu ";
-
-  transition: var(--tabTransition);
-}
-
-#settingTabs li#devTab:hover:before {
-  opacity: 1;
-  visibility: visible;
-  font-size: inherit;
-
-  transition: var(--tabTransition);
 }
 
 #storyTabs ul {
@@ -405,7 +317,7 @@ input[type=text] {
   float: right;
   padding: 1rem 1.25rem 1rem .75rem;
 
-  background-color: rgb(25, 25, 25);
+  background-color: hsl(0, 0%, 15%);
   box-shadow: 0 2px 8px rgb(0 0 0 / 50%);
   border-radius: 20px;
 
@@ -421,7 +333,7 @@ input[type=text] {
   cursor: pointer;
 }
 
-#storyTabs li#knowledgeTab:after {
+#storyTabs li:after {
   opacity: 0;
   visibility: hidden;
   font-size: 0vw;
@@ -430,31 +342,20 @@ input[type=text] {
   transition: var(--tabTransition);
 }
 
-#storyTabs li#knowledgeTab:hover:after {
+#storyTabs li:hover:after {
   opacity: 1;
   visibility: visible;
   font-size: inherit;
 
-  content: " Knowledge";
-
   transition: var(--tabTransition);
+}
+
+#storyTabs li#knowledgeTab:after {
+  content: " Knowledge";
 }
 
 #storyTabs li#peopleTab:after {
-  opacity: 0;
-  visibility: hidden;
-  font-size: 0vw;
   content: " People";
-
-  transition: var(--tabTransition);
-}
-
-#storyTabs li#peopleTab:hover:after {
-  opacity: 1;
-  visibility: visible;
-  font-size: inherit;
-
-  transition: var(--tabTransition);
 }
 
 #debug-bar-hint {
