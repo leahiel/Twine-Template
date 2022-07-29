@@ -7,7 +7,8 @@
   --body-text: hsl(0, 0%, 93%);
   --chapter-text-transition: opacity 0.35s;
   --link-text: hsl(223, 64%, 63%);
-  --warning-color: hsl(0, 39%, 51%)
+  --warning-color: hsl(0, 39%, 51%);
+  --tabTransition: font-size 0.35s, opacity 0.35s, visibility 0.35s;
 }
 
 /*  
@@ -60,7 +61,15 @@
  ##     ## ####  ######   ######  ######## ######## ######## ##     ## ##    ## ########  #######   #######   ######   
  */
 
+ html {
+  background-color: rgb(50, 50, 50);
+}
+
 body {
+  color: rgb(255, 255, 255);
+  background-color: rgb(50, 50, 50);
+
+  font-size: 20px;
   text-shadow: 1px 1px 3px black;
 }
 
@@ -90,14 +99,19 @@ ul {
   margin-block-end: 0.45rem;
 }
 
+input[type=text] {
+  min-width: min(18em, 20vw);
+  max-width: 100%;
+}
+
 /* 
-##     ## ####    ########     ###    ########   
-##     ##  ##     ##     ##   ## ##   ##     ##  
-##     ##  ##     ##     ##  ##   ##  ##     ##  
-##     ##  ##     ########  ##     ## ########   
-##     ##  ##     ##     ## ######### ##   ##    
-##     ##  ##     ##     ## ##     ## ##    ##   
- #######  ####    ########  ##     ## ##     ##  
+##     ## ####  
+##     ##  ##   
+##     ##  ##   
+##     ##  ##   
+##     ##  ##   
+##     ##  ##   
+ #######  ####  
  */
 
 .knowledge {
@@ -151,6 +165,295 @@ ul {
 #ui-dialog-body {
   padding-left: 2rem;
   padding-right: 2rem;
+}
+
+#mainwrapper {
+  height: min(calc(100% - 2rem), 80%);
+  width: min(65rem, 90vw);
+
+  margin-left: auto;
+  margin-right: auto;
+
+  box-shadow: 0 2px 8px rgb(0 0 0 / 50%);
+  border-radius: 20px;
+  
+  background-color: rgb(40, 40, 40);
+}
+
+#wrapperBottomText {
+  padding: 3rem;
+  color: hsl(0deg 0% 65%);
+}
+
+#passages {
+  margin-left: auto;
+  margin-right: auto;
+
+  /* margin-top: 2rem; */
+  background-color: rgb(25, 25, 25);
+  box-shadow: 0 2px 8px rgb(0 0 0 / 50%);
+  border-radius: 20px;
+  padding: 1.5rem 3rem;
+}
+
+#databaseInfoTab {
+  position: fixed;
+  left: 1rem;
+  top: -1rem;
+
+  padding: 1.25rem .75rem 0rem;
+
+  background-color: rgb(35, 35, 35);
+  box-shadow: 0 2px 8px rgb(0 0 0 / 50%);
+  border-radius: 12px;
+
+  height: 4vh;
+  line-height: 4vh;
+  font-size: 2vh;
+  text-align: center;
+}
+
+#settingTabs ul {
+  position: fixed;
+  width: 20vw;
+
+  left: -5rem;
+  top: 3rem;
+
+  list-style-type: none;
+}
+
+#settingTabs li {
+  display: inline-block; 
+  float: left;
+  
+  height: 4vh;
+  margin-top: 1rem;
+  margin-right: 300rem;
+  padding: .75rem .5rem .75rem 2.75rem;
+  
+  box-shadow: 0 2px 8px rgb(0 0 0 / 50%);
+  border-radius: 20px;
+
+  background-color: rgb(35, 35, 35);
+  
+  line-height: 4vh;
+  font-size: 2vh;
+  text-align: center;
+  white-space: nowrap;
+
+  cursor: pointer;
+}
+
+#settingTabs li#undoTab:before {
+  opacity: 0;
+  visibility: hidden;
+  font-size: 0vw;
+  content: "Back ";
+
+  transition: var(--tabTransition);
+}
+
+#settingTabs li#undoTab:hover:before {
+  opacity: 1;
+  visibility: visible;
+  font-size: inherit;
+
+  transition: var(--tabTransition);
+}
+
+#settingTabs li#redoTab:before {
+  opacity: 0;
+  visibility: hidden;
+  font-size: 0vw;
+  content: "Forward ";
+
+  transition: var(--tabTransition);
+}
+
+#settingTabs li#redoTab:hover:before {
+  opacity: 1;
+  visibility: visible;
+  font-size: inherit;
+
+  transition: var(--tabTransition);
+}
+
+#settingTabs li#settingsTab:before {
+  opacity: 0;
+  visibility: hidden;
+  font-size: 0vw;
+  content: "Settings ";
+
+  transition: var(--tabTransition);
+}
+
+#settingTabs li#settingsTab:hover:before {
+  opacity: 1;
+  visibility: visible;
+  font-size: inherit;
+
+  transition: var(--tabTransition);
+}
+
+#settingTabs li#disableContentsTab:before {
+  opacity: 0;
+  visibility: hidden;
+  font-size: 0vw;
+  content: "Disable Content ";
+
+  transition: var(--tabTransition);
+}
+
+#settingTabs li#disableContentsTab:hover:before {
+  opacity: 1;
+  visibility: visible;
+  font-size: inherit;
+
+  transition: var(--tabTransition);
+}
+
+#settingTabs li#savesTab:before {
+  opacity: 0;
+  visibility: hidden;
+  font-size: 0vw;
+  content: "Saves ";
+
+  transition: var(--tabTransition);
+}
+
+#settingTabs li#savesTab:hover:before {
+  opacity: 1;
+  visibility: visible;
+  font-size: inherit;
+
+  transition: var(--tabTransition);
+}
+
+#settingTabs li#restartTab:before {
+  opacity: 0;
+  visibility: hidden;
+  font-size: 0vw;
+  content: "Restart ";
+
+  transition: var(--tabTransition);
+}
+
+#settingTabs li#restartTab:hover:before {
+  opacity: 1;
+  visibility: visible;
+  font-size: inherit;
+
+  transition: var(--tabTransition);
+}
+
+#settingTabs li#creditsTab:before {
+  opacity: 0;
+  visibility: hidden;
+  font-size: 0vw;
+  content: "Credits ";
+
+  transition: var(--tabTransition);
+}
+
+#settingTabs li#creditsTab:hover:before {
+  opacity: 1;
+  visibility: visible;
+  font-size: inherit;
+
+  transition: var(--tabTransition);
+}
+
+#settingTabs li#devTab {
+  background-color: red;
+}
+
+#settingTabs li#devTab:before {
+  opacity: 0;
+  visibility: hidden;
+  font-size: 0vw;
+  content: "Dev Menu ";
+
+  transition: var(--tabTransition);
+}
+
+#settingTabs li#devTab:hover:before {
+  opacity: 1;
+  visibility: visible;
+  font-size: inherit;
+
+  transition: var(--tabTransition);
+}
+
+#storyTabs ul {
+  position: fixed;
+  width: 20vw;
+
+  right: -1rem;
+  top: 3rem;
+
+  list-style-type: none;
+}
+
+#storyTabs li { 
+  display: inline-block;
+  float: right;
+  padding: 1rem 1.25rem 1rem .75rem;
+
+  background-color: rgb(35, 35, 35);
+  box-shadow: 0 2px 8px rgb(0 0 0 / 50%);
+  border-radius: 20px;
+
+  margin-top: 1rem;
+  margin-left: 50vw;
+
+  height: 4vh;
+  line-height: 4vh;
+  font-size: 2vh;
+  text-align: center;
+
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+#storyTabs li#knowledgeTab:after {
+  opacity: 0;
+  visibility: hidden;
+  font-size: 0vw;
+  content: " ";
+
+  transition: var(--tabTransition);
+}
+
+#storyTabs li#knowledgeTab:hover:after {
+  opacity: 1;
+  visibility: visible;
+  font-size: inherit;
+
+  content: " Knowledge";
+
+  transition: var(--tabTransition);
+}
+
+#storyTabs li#peopleTab:after {
+  opacity: 0;
+  visibility: hidden;
+  font-size: 0vw;
+  content: " People";
+
+  transition: var(--tabTransition);
+}
+
+#storyTabs li#peopleTab:hover:after {
+  opacity: 1;
+  visibility: visible;
+  font-size: inherit;
+
+  transition: var(--tabTransition);
+}
+
+#debug-bar-hint {
+  display: none;
 }
 
 /* 
@@ -257,17 +560,18 @@ ul {
   display: block;
   position: relative;
 
-  margin-top: -2rem;
   margin-left: auto;
   margin-right: auto;
 
-  width: max-content;
+  /* width: max-content; */
 
   color: rgb(80, 80, 80);
-  font-size: 1.6rem;
+  font-size: 2.5rem;
   font-family: backslash;
 
   transition: var(--chapter-text-transition);
+
+  text-align: center;
 }
 
 #chapterheader:before {
@@ -279,8 +583,8 @@ ul {
 
   content: "chapter: ";
 
-  color: rgb(60, 60, 60);
-  font-size: 0.5rem;
+  font-size: 1rem;
+  color: rgb(70, 70, 70);
   font-family: monospace;
 
   transition: var(--chapter-text-transition);
@@ -296,9 +600,10 @@ ul {
   display: block;
   opacity: 0;
 
-  margin-top: -0.7rem;
+  margin-top: -0.5rem;
+  margin-bottom: 0.7rem;
 
-  color: rgb(60, 60, 60);
+  color: rgb(70, 70, 70);
   text-align: center;
 
   transition: var(--chapter-text-transition);

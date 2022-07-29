@@ -31,6 +31,16 @@ This is great for variables and settings. */
 initialize the corresponding variables here, so we can keep 
 everything tidy. */
 
+/* 
+##     ## ####  ######   ######  
+###   ###  ##  ##    ## ##    ## 
+#### ####  ##  ##       ##       
+## ### ##  ##   ######  ##       
+##     ##  ##        ## ##       
+##     ##  ##  ##    ## ##    ## 
+##     ## ####  ######   ######  
+*/
+
 /* Set a tooltip for a singular word. This also makes it a template. 
 FIXME: After a linkreplace, this function doesn't work properly. Likely an issue with tt-macro. */
 function add_tooltip (macroname, passage, metaname = false) {
@@ -51,6 +61,15 @@ function add_tooltip (macroname, passage, metaname = false) {
     });
 };
 
+/*
+########     ###    ########    ###    ########     ###     ######  ######## 
+##     ##   ## ##      ##      ## ##   ##     ##   ## ##   ##    ## ##       
+##     ##  ##   ##     ##     ##   ##  ##     ##  ##   ##  ##       ##       
+##     ## ##     ##    ##    ##     ## ########  ##     ##  ######  ######   
+##     ## #########    ##    ######### ##     ## #########       ## ##       
+##     ## ##     ##    ##    ##     ## ##     ## ##     ## ##    ## ##       
+########  ##     ##    ##    ##     ## ########  ##     ##  ######  ######## 
+*/
 
 /* DEV FEATURES */
 /* HACK: For some reason, the StoryMenu isn't able to comprehend the 
@@ -140,7 +159,15 @@ importScripts(["src/assets/js/uuid.min.js", "src/assets/js/game_ssr.js"])
     }
 ;
 
-
+/* 
+##     ##    ###    ########  ####    ###    ########  ##       ########  ######  
+##     ##   ## ##   ##     ##  ##    ## ##   ##     ## ##       ##       ##    ## 
+##     ##  ##   ##  ##     ##  ##   ##   ##  ##     ## ##       ##       ##       
+##     ## ##     ## ########   ##  ##     ## ########  ##       ######    ######  
+ ##   ##  ######### ##   ##    ##  ######### ##     ## ##       ##             ## 
+  ## ##   ##     ## ##    ##   ##  ##     ## ##     ## ##       ##       ##    ## 
+   ###    ##     ## ##     ## #### ##     ## ########  ######## ########  ######  
+*/
 /* GAME FEATURES */
 State.variables.ft_knowledge = false;
 State.variables.ft_people = false;
@@ -189,7 +216,16 @@ add_tooltip("Lox", "L_Lox")
 add_tooltip("tower", "TT_Tower");
 
 
-// SETTINGS MENU STUFF.
+/*
+ ######  ######## ######## ######## #### ##    ##  ######    ######  
+##    ## ##          ##       ##     ##  ###   ## ##    ##  ##    ## 
+##       ##          ##       ##     ##  ####  ## ##        ##       
+ ######  ######      ##       ##     ##  ## ## ## ##   ####  ######  
+      ## ##          ##       ##     ##  ##  #### ##    ##        ## 
+##    ## ##          ##       ##     ##  ##   ### ##    ##  ##    ## 
+ ######  ########    ##       ##    #### ##    ##  ######    ######  
+*/
+
 // Toggle the option for images.
 // Setting.addToggle("images", {
 //     label: "Allow images?",

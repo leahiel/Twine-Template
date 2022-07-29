@@ -1,0 +1,157 @@
+:: StoryInterface [.ui nostats]
+<div id="mainwrapper">
+    <div id="passages"></div>
+    <div id="wrapperBottomText" data-passage="uiBottomText"></div>
+</div>
+<div id="settingTabs">
+    <ul>
+        <li id="undoTab" data-passage="uiUndo"></li>
+        <li id="redoTab" data-passage="uiRedo"></li>
+        <li id="settingsTab" data-passage="uiSettings"></li>
+        <li id="disableContentsTab" data-passage="uiDisableContent"></li>
+        <li id="savesTab" data-passage="uiSaves"></li>
+        <li id="restartTab" data-passage="uiRestart"></li>
+        <li id="creditsTab" data-passage="uiCredits"></li>
+        <li id="devTab" data-passage="uiDev"></li>
+    </ul>
+</div>
+<div id="storyTabs">
+    <ul>
+        <li id="knowledgeTab" data-passage="uiKnowledge"></li>
+        <li id="peopleTab" data-passage="uiPeople"></li>
+        <!-- <li id="afterwardsTab" data-passage="uiAfterwards"></li> -->
+    </ul>
+</div>
+<div id="databaseInfoTab" data-passage="uiDatabaseInfo"></div>
+<script>
+</script>
+
+
+
+<!-- 
+Most of our elements here are in a dialog so that when the user is 
+done with it, they can get right back to the story. There's no back 
+button or extra link needed.
+
+Dialogs can change story variables, but they won't change on the 
+current [non-dialog] passage, unless it calls:
+  [Go To and Render Passage]  Engine.play("Passage") 
+  [Re-Render Current Passage] Engine.show()
+-->
+
+:: uiUndo [.ui nostats]
+<-
+<<script>>
+$("li#undoTab").click(() => Engine.backward());
+<</script>>
+
+:: uiRedo [.ui nostats]
+->
+<<script>>
+$("li#redoTab").click(() => Engine.forward());
+<</script>>
+
+:: uiSettings [.ui nostats]
+⚙️
+<<script>>
+$("li#settingsTab").click(() => UI.settings());
+<</script>>
+
+:: uiDisableContent [.ui nostats]
+❌
+<<script>>
+$("li#disableContentsTab").click(() => {
+    Dialog.setup();
+    Dialog.wiki(Story.get("FetishPicker").processText());
+    Dialog.open();
+});
+<</script>>
+
+:: uiSaves [.ui nostats]
+💾
+<<script>>
+$("li#savesTab").click(() => UI.saves());
+<</script>>
+
+:: uiRestart [.ui nostats]
+🔁
+<<script>>
+$("li#restartTab").click(() => {Engine.restart()});
+<</script>>
+
+:: uiCredits [.ui nostats]
+📜
+<<script>>
+$("li#creditsTab").click(() => {
+    Dialog.setup();
+    Dialog.wiki(Story.get("CreditsText").processText());
+    Dialog.open();
+});
+<</script>>
+
+:: uiDev [.ui nostats]
+🛠️
+<<script>>
+$("li#devTab").click(() => {
+    Dialog.setup();
+    Dialog.wiki(Story.get('DevOptionsText').processText());
+    Dialog.open();
+});
+<</script>>
+
+:: uiKnowledge [.ui nostats]
+📖
+<<script>>
+$("li#knowledgeTab").click(() => {
+    Dialog.setup();
+    Dialog.wiki(Story.get("KnowledgeText").processText());
+    Dialog.open();
+});
+<</script>>
+
+:: uiPeople [.ui nostats]
+🧑🏻‍🤝‍🧑🏻
+<<script>>
+$("li#peopleTab").click(() => {
+    Dialog.setup();
+    Dialog.wiki(Story.get("PeopleText").processText());
+    Dialog.open();
+});
+<</script>>
+
+:: uiDatabaseInfo [.ui nostats]
+<span id="database-text"></span>
+<<script>>
+if (State.variables.user.logged_in) {
+    $("#database-text").text("Connected to Server");
+} else {
+    $("#database-text").text("Disconnected");
+    $("#databaseInfoTab").css("cursor", "pointer");
+    $("#databaseInfoTab").click(() => {
+        /* FIXME SERVER: We shouldn't open the window directly, rather we should open a dialogue box that tells users things, that has a link with which they can click to open the window. */
+        window.open(`https://itch.io/user/oauth?client_id=9a5a87634b363c3ce3908f94c8767e1b&scope=profile%3Ame&response_type=token&redirect_uri=https%3A%2F%2Fmetadb-a53ef.web.app%2Fitch_oauth.html&state=${recall('user-uuid')}&`, "_blank");
+    });  
+}
+<</script>>
+
+:: uiAfterwards [.ui nostats]
+Afterwards
+<<script>>
+if (State.variables.ft_dev_ending) {
+    $("#afterwardsTab").css("cursor", "pointer");
+    $("#afterwardsTab").css("display", "contents");
+    $("#afterwardsTab").click(() => {
+        Dialog.setup();
+        Dialog.wiki(Story.get("Debug-ending").processText());
+        Dialog.open();
+    }); 
+} else {
+    $("#afterwardsTab").css("display", "none");
+}
+<</script>>
+
+:: uiBottomText [.ui nostats]
+/* TODO: Put btotom text containing the story and maybe the itch link or something. */
+Twine Template
+by
+LeahPeach

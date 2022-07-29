@@ -132,7 +132,7 @@ $('span#passagetitleheader').text(curPsgTitle);
 If that element is a <<link>>, check if the passage tags it links 
 to. If they are on the fetish lists, disable them or flag them for
 a warning. */
-const targetNode = document.getElementById('story');
+const targetNode = document.getElementById('passages');
 const config = {
   childList: true,
   subtree: true
