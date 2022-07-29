@@ -17,7 +17,7 @@
 <h4><label>Name thyself:   <<textbox "$pc_name" "Leah">></label></h4>
 <br> 
 <label>Which set of pronouns do you prefer? 
-	/* FIXME: Make the variable value different from these visible values. */
+	/* NEXT: Make the variable value different from these visible values. */
 	<<cycle "_pronouns" "autoselect">>
 		<<option "he/him/his">>
 		<<option "she/her/hers">>

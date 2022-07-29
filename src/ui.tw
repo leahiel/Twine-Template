@@ -128,7 +128,7 @@ if (State.variables.user.logged_in) {
     $("#database-text").text("Disconnected");
     $("#databaseInfoTab").css("cursor", "pointer");
     $("#databaseInfoTab").click(() => {
-        /* FIXME SERVER: We shouldn't open the window directly, rather we should open a dialogue box that tells users things, that has a link with which they can click to open the window. */
+        /* NEXT SERVER: We shouldn't open the window directly, rather we should open a dialogue box that tells users things, that has a link with which they can click to open the window. */
         window.open(`https://itch.io/user/oauth?client_id=9a5a87634b363c3ce3908f94c8767e1b&scope=profile%3Ame&response_type=token&redirect_uri=https%3A%2F%2Fmetadb-a53ef.web.app%2Fitch_oauth.html&state=${recall('user-uuid')}&`, "_blank");
     });  
 }

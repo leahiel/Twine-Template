@@ -67,9 +67,9 @@ html {
 
 body {
   color: rgb(255, 255, 255);
-  background-color: hsla(0, 0%, 0%, 0); /* Overwrite default SC css. */
+  /* background-color: hsla(0, 0%, 0%, 0); */ /* Overwrites default SC css. */
 
-  height: min(calc(100% - 2rem), 80%);
+  /* height: min(calc(100% - 2rem), 80%); */
   width: min(65rem, 90vw);
 
   margin-top: 2.5rem;

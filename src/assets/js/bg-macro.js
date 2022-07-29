@@ -27,7 +27,7 @@ Macro.add("bg", {
         let sheet = window.document.styleSheets[0]
         console.log(sheet)
         // If we just keep inserting more rules into the first place, we'll be in trouble.
-        // XXX: Surely there's an issue with this. I'm deleting whatever is at 0 before making sure its my code...
+        // XXX: Surely there's an issue with this. I'm deleting whatever is at 0 before making sure it's my code...
         sheet.deleteRule(0);
         sheet.insertRule(`
             html {

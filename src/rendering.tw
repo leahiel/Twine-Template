@@ -116,7 +116,7 @@ let chaptertitles = {
 };
 
 Object.keys(chaptertitles).forEach(key => {
-  /* FIXME: Add ability to check for an alternative title. For instance, if a possible has @1 but T2, then T2 should take precedence over @1. This should be done programmatically, and not be based on which tag is processed last. Once that's done, actually add in the new titles, like "The Departure" and whatnot. */
+  /* NEXT: Add ability to check for an alternative title. For instance, if a possible has @1 but T2, then T2 should take precedence over @1. This should be done programmatically, and not be based on which tag is processed last. Once that's done, actually add in the new titles, like "The Departure" and whatnot. */
   if (curPsg.tags.includes(key)) {
     curPsgChapter = chaptertitles[key];
     return;

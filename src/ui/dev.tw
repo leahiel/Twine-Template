@@ -81,7 +81,7 @@ Object.keys(State.variables).sort().forEach(key => {
 		});
 	
 	} else if (typeof(State.variables[key]) === "number") {
-		/* FIXME: Variable Debugger: Numbers */
+		/* NEXT: Variable Debugger: Numbers */
 		/* add +/- to document.querySelector("#storyvars") */
 	
 	} else if (typeof(State.variables[key]) === "string") {

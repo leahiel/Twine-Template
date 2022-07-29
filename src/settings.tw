@@ -42,7 +42,7 @@ everything tidy. */
 */
 
 /* Set a tooltip for a singular word. This also makes it a template. 
-FIXME: After a linkreplace, this function doesn't work properly. Likely an issue with tt-macro. */
+BUG: After a linkreplace, this function doesn't work properly. Likely an issue with tt-macro. */
 function add_tooltip (macroname, passage, metaname = false) {
     let psg = Story.get(passage);
     
@@ -97,7 +97,7 @@ importScripts(["src/assets/js/uuid.min.js", "src/assets/js/game_ssr.js"])
         /* Ensure we are logged in every time. */
         State.variables.user.logged_in = false;
 
-        /* FIXME SERVER: We are making a local db from the exported object db (from game_ssr.js) This line is fucking cursed. */
+        /* FIXME SERVER: We are making a local db from the exported object db (from game_ssr.js) This line is fucking cursed. Rename the exported object. */
         db = new db; 
         
         if (!recall('user-uuid')) {
