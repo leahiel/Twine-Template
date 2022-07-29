@@ -1,7 +1,7 @@
 /* NEXT: Make a system where this is done via js in the passage, so I don't have to keep coming back here. The transparency also needs to be set with js too, as different images need different amounts of transparency. */
 /* Perhaps with https://twinelab.net/custom-macros-for-sugarcube-2/demo/?macro=css */
 
-body[data-tags~="start"] {
+html[data-tags~="start"] {
   background-image: linear-gradient(rgba(0, 0, 0, 0.70), rgba(0, 0, 0, 0.70)), url("src/assets/img/mangroves.jpeg");
   background-size: cover;
   height: 100vh;

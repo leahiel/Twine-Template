@@ -1,10 +1,10 @@
-:: PeopleText [.uibar nostats] {"position":"125,950"}
+:: PeopleText [.uibar nostats] {"position":"125,550"}
 @@.dialog-header;People@@
 <<include [[P_Orick]]>>
 
 
 
-:: P_Template [.people] {"position":"125,975"}
+:: P_Template [.people] {"position":"125,575"}
 <<if $ppl_tmpl_met>>
     @@.knowledge;Template Matter:@@<br>
     Lorem Ipsum about template matter.
@@ -12,7 +12,7 @@
 
 
 
-:: P_Orick [.people] {"position":"125,1025"}
+:: P_Orick [.people] {"position":"125,600"}
 <<if $ppl_orick_met>>
     @@.knowledge;Orick:@@<br>
     Orick has lent you his carriage in return for two lunging beetles. He wanred you not to betray him.

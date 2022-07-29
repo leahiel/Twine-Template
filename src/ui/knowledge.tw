@@ -1,4 +1,4 @@
-:: KnowledgeText [.uibar nostats] {"position":"0,950"}
+:: KnowledgeText [.uibar nostats] {"position":"0,525"}
 @@.dialog-header;Knowledge Base@@
 <<include K_Homunculi>>
 <<include K_Fairies>>
@@ -8,7 +8,7 @@
 
 
 
-:: K_Template [.knowledge] {"position":"0,975"}
+:: K_Template [.knowledge] {"position":"0,550"}
 <<if true>>
     @@.knowledge;Template Matter:@@<br>
     Lorem Ipsum about template matter.
@@ -16,7 +16,7 @@
 
 
 
-:: K_Homunculi [.knowledge] {"position":"0,1000"}
+:: K_Homunculi [.knowledge] {"position":"0,575"}
 <<if $kn_homunculi_lv gte 1>>
     @@.knowledge;Homunculus:@@<br>
     A homunculus is merely a human who has failed on their journey to immortality.
@@ -31,7 +31,7 @@
 
 
 
-:: K_Fairies [.knowledge] {"position":"0,1025"}
+:: K_Fairies [.knowledge] {"position":"0,600"}
 <<if $kn_fairy_lv gte 1>>
     @@.knowledge;Fairies:@@
     Fairies are fairly well-known creatures. The ladies look like miniature humanoids with wings on their backs, but the men are indistinguishable from flowers. This hybrid of magical, plant, and animalistic features has made fairies into one of the most researched creatures. <<if $kn_fairy_lv gte 2>>In order to mate, the fairies play an intricate game. The females will flit around the petals of the males, and the males have to use their vines to catch the female. When the female is caught, she is brought into the folds of the flower, which function as a bed for her during copulation. <<if $kn_fairy_lv gte 3>>Because the men are rooted to the ground, researchers believe that the females have all the power in the relationship. The ladies have been known to simply fly away from their partner forever if they find him unsatisfactory.<</if>><</if>>
@@ -39,7 +39,7 @@
 
 
 
-:: K_Lunging_Beetle [.knowledge] {"position":"0,1050"}
+:: K_Lunging_Beetle [.knowledge] {"position":"0,625"}
 <<if $kn_lunging_beetle_lv gte 1>>
     @@.knowledge;Lunging Beetles:@@<br>
     Lunging beetles are parasitic prey that jump towards their prey and embed themselves into their flesh, where they slowly devour the flesh and mate. While magic users are able to defend from the beetles easily, standard non-magic people have no real defenses from them. As a result, requests often go out to guild halls to destroy these pests when they're discovered.
@@ -48,7 +48,7 @@
 
 
 
-:: K_Merfolk [.knowledge] {"position":"0,1075"}
+:: K_Merfolk [.knowledge] {"position":"0,650"}
 <<if $kn_merfolk_lv gte 1>>
     @@.knowledge;Merfolk:@@<br>
     While knowledge that the merfolk exist is common, the exact details of their nature and heirarchical society are not well known. The gap between water-breathing and air-breathing creatures is too vast a gap for proper research to be conducted.
@@ -56,7 +56,7 @@
 
 
 
-:: K_Sylphs [.knowledge] {"position":"0,1100"}
+:: K_Sylphs [.knowledge] {"position":"0,675"}
 <<if $kn_sylphs_lv gte 1>>
     @@.knowledge;Sylphs:@@<br>
     Sylphs are cute little creatures. Almost like fairies, but with less than half the intelligence. <<if $kn_sylphs_lv gte 2>>Sylphs are normally playful creatures that like to play pranks. They're not into malicious things like causing people pain for no reason.<</if>>
@@ -64,7 +64,7 @@
 
 
 
-:: K_Vampires [.knowledge] {"position":"0,1125"}
+:: K_Vampires [.knowledge] {"position":"0,700"}
 <<if $kn_vampire_lv gte 1>>
     @@.knowledge;Vampires:@@<br>
     You don't know much about vampires, except that they like to drink the blood of humans for nutrition and energy.

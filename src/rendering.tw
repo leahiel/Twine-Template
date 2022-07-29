@@ -1,4 +1,4 @@
-:: PassageReady [.rendering] {"position":"125,675"}
+:: PassageReady [.rendering] {"position":"125,125"}
 /* Everything here is done before every passage begins rendering.
 Best for checking variables and whatnot. */
 <<script>>
@@ -74,7 +74,7 @@ function settingsHandler() {
 
 
 
-:: PassageHeader [.rendering] {"position":"125,700"}
+:: PassageHeader [.rendering] {"position":"125,225"}
 /* Everything here is rendered at the start of every passage rendering. 
 It's intended for actual rendering stuff. */
 <div id="chapterheader">Chapter Header Text</div>
@@ -82,13 +82,13 @@ It's intended for actual rendering stuff. */
 
 
 
-:: PassageFooter [.rendering] {"position":"125,725"}
+:: PassageFooter [.rendering] {"position":"125,325"}
 /* Everything here is rendered at the end of every passage rendering.
 It's intended for actual rendering stuff. */
 
 
 
-:: PassageDone [.rendering] {"position":"125,750"}
+:: PassageDone [.rendering] {"position":"125,425"}
 /* Everything here is done after each passage is rendered. Best for 
 event handlers and the like. */
 <<script>>
@@ -210,4 +210,28 @@ $(document).ready(function() {
     theme: 'tooltipster-custom'
   }); 
 });
+
+/* Discourage Forward/Backward if not usable. */
+$("li#forwardTab")
+    .ariaDisabled(State.length === State.size)
+	  .ariaClick({}, () => Engine.forward());
+if ($("li#forwardTab").ariaIsDisabled()) {
+    $("li#forwardTab").css("color", "grey");
+    $("li#forwardTab").css("cursor", "not-allowed");
+} else {
+    $("li#forwardTab").css("color", "inherit");
+    $("li#forwardTab").css("cursor", "inherit");
+}
+
+$("li#backwardTab")
+    .ariaDisabled(State.length < 2)
+    .ariaClick({}, () => Engine.backward());
+if ($("li#backwardTab").ariaIsDisabled()) {
+    $("li#backwardTab").css("color", "grey");
+    $("li#backwardTab").css("cursor", "not-allowed");
+} else {
+    $("li#backwardTab").css("color", "inherit");
+    $("li#backwardTab").css("cursor", "inherit");
+}
+
 <</script>>

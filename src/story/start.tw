@@ -1,4 +1,4 @@
-:: Start [@0 start nostats] {"position":"25,25"}
+:: Start [@0 start nostats] {"position":"400,300"}
 /* Banner Image Here, I guess */
 <<set _pronouns to "">>
 

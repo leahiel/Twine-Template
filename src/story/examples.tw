@@ -1,4 +1,4 @@
-:: Link-Replace-Prepend [@ex nostats] {"position":"50,500"}
+:: Link-Replace-Prepend [@ex nostats] {"position":"600,400"}
 /* Showing how to use Link Replaces to go through all options, and then showing a final text block. */
 <<set _loc to "#1_resp">>
 Here, I want to show off using an event handler to show text, and then show the text block afterwards.
@@ -63,14 +63,14 @@ Here, I want to show off using an event handler to show text, and then show the 
     >>
 <</done>>
 
-:: Link-Replace-Prepend-Helper [@ex nostats] {"position":"50,525"}
+:: Link-Replace-Prepend-Helper [@ex nostats] {"position":"700,400"}
 And there you go, all the text has been replaced! This text has been added using a passage.
 
 
 
 
 
-:: Link-Replace-Hide-Others [@ex nostats] {"position":"150,500"}
+:: Link-Replace-Hide-Others [@ex nostats] {"position":"600,200"}
 Only one option will you pick, Which one will it be?
 <br><br>
 <<linkreplace "The top option is superior.<br>" t8n>>
@@ -95,5 +95,5 @@ Only one option will you pick, Which one will it be?
     >>
 <</done>>
 
-:: Link-Replace-Hide-Others-Helper [@ex nostats] {"position":"150,525"}
+:: Link-Replace-Hide-Others-Helper [@ex nostats] {"position":"700,200"}
 This is the helper text that appears after you pick an option.

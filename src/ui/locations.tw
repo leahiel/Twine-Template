@@ -1,10 +1,10 @@
 /* While support exists for these, but they are unused in this prototype game. */
-:: LocationsText [.uibar nostats] {"position":"250,950"}
+:: LocationsText [.uibar nostats] {"position":"250,550"}
 <<include "L_Lox">>
 
 
 
-:: L_Template [.location] {"position":"250,975"}
+:: L_Template [.location] {"position":"250,575"}
 <<if $loc_tmpl_disc>>
     @@.knowledge;Template Matter:@@<br>
     Lorem Ipsum about template matter.
@@ -12,7 +12,7 @@
 
 
 
-:: L_Lox [.location] {"position":"250,1000"}
+:: L_Lox [.location] {"position":"250,600"}
 <<if $loc_lox_disc>>
     @@.knowledge;The Mangrove Forests of Loxahatchee:@@<br>
     The mangrove of Lox were located just outside the large village of Loxahatchee. You've wanted to visit here for a long while, as mangroves have a very unique environmental condition that you felt would be soothing for your lizard constitution: Hot, wet, and comfortable.

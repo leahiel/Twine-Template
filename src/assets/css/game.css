@@ -61,13 +61,23 @@
  ##     ## ####  ######   ######  ######## ######## ######## ##     ## ##    ## ########  #######   #######   ######   
  */
 
- html {
+html {
   background-color: rgb(50, 50, 50);
 }
 
 body {
   color: rgb(255, 255, 255);
-  background-color: rgb(50, 50, 50);
+  background-color: hsla(0, 0%, 0%, 0); /* Overwrite default SC css. */
+
+  height: min(calc(100% - 2rem), 80%);
+  width: min(65rem, 90vw);
+
+  margin-top: 2.5rem;
+  margin-left: auto;
+  margin-right: auto;
+
+  box-shadow: 0 2px 8px rgb(0 0 0 / 50%);
+  border-radius: 20px;
 
   font-size: 20px;
   text-shadow: 1px 1px 3px black;
@@ -168,9 +178,6 @@ input[type=text] {
 }
 
 #mainwrapper {
-  height: min(calc(100% - 2rem), 80%);
-  width: min(65rem, 90vw);
-
   margin-left: auto;
   margin-right: auto;
 
@@ -203,7 +210,7 @@ input[type=text] {
 
   padding: 1.25rem .75rem 0rem;
 
-  background-color: rgb(35, 35, 35);
+  background-color: rgb(25, 25, 25);
   box-shadow: 0 2px 8px rgb(0 0 0 / 50%);
   border-radius: 12px;
 
@@ -234,7 +241,7 @@ input[type=text] {
   box-shadow: 0 2px 8px rgb(0 0 0 / 50%);
   border-radius: 20px;
 
-  background-color: rgb(35, 35, 35);
+  background-color: rgb(25, 25, 25);
   
   line-height: 4vh;
   font-size: 2vh;
@@ -244,7 +251,7 @@ input[type=text] {
   cursor: pointer;
 }
 
-#settingTabs li#undoTab:before {
+#settingTabs li#backwardTab:before {
   opacity: 0;
   visibility: hidden;
   font-size: 0vw;
@@ -253,7 +260,7 @@ input[type=text] {
   transition: var(--tabTransition);
 }
 
-#settingTabs li#undoTab:hover:before {
+#settingTabs li#backwardTab:hover:before {
   opacity: 1;
   visibility: visible;
   font-size: inherit;
@@ -261,7 +268,7 @@ input[type=text] {
   transition: var(--tabTransition);
 }
 
-#settingTabs li#redoTab:before {
+#settingTabs li#forwardTab:before {
   opacity: 0;
   visibility: hidden;
   font-size: 0vw;
@@ -270,7 +277,7 @@ input[type=text] {
   transition: var(--tabTransition);
 }
 
-#settingTabs li#redoTab:hover:before {
+#settingTabs li#forwardTab:hover:before {
   opacity: 1;
   visibility: visible;
   font-size: inherit;
@@ -398,7 +405,7 @@ input[type=text] {
   float: right;
   padding: 1rem 1.25rem 1rem .75rem;
 
-  background-color: rgb(35, 35, 35);
+  background-color: rgb(25, 25, 25);
   box-shadow: 0 2px 8px rgb(0 0 0 / 50%);
   border-radius: 20px;
 
@@ -571,29 +578,6 @@ input[type=text] {
 
   text-align: center;
   line-height: 3rem;
-}
-
-#chapterheader:before {
-  opacity: 0;
-
-  position: absolute;
-  top: 38%;
-  right: 105%;
-
-  /* TODO: This is totally in the wrong place now lmao. */
-  content: "chapter: ";
-
-  font-size: 1rem;
-  color: rgb(70, 70, 70);
-  font-family: monospace;
-
-  transition: var(--chapter-text-transition);
-}
-
-#chapterheader:hover:before {
-  opacity: 1;
-
-  transition: var(--chapter-text-transition);
 }
 
 #passagetitleheader {

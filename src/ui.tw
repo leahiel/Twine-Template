@@ -1,12 +1,12 @@
-:: StoryInterface [.ui nostats]
+:: StoryInterface [.ui nostats] {"position":"125,0"}
 <div id="mainwrapper">
     <div id="passages"></div>
     <div id="wrapperBottomText" data-passage="uiBottomText"></div>
 </div>
 <div id="settingTabs">
     <ul>
-        <li id="undoTab" data-passage="uiUndo"></li>
-        <li id="redoTab" data-passage="uiRedo"></li>
+        <li id="backwardTab" data-passage="uiBackward"></li>
+        <li id="forwardTab" data-passage="uiForward"></li>
         <li id="settingsTab" data-passage="uiSettings"></li>
         <li id="disableContentsTab" data-passage="uiDisableContent"></li>
         <li id="savesTab" data-passage="uiSaves"></li>
@@ -23,8 +23,6 @@
     </ul>
 </div>
 <div id="databaseInfoTab" data-passage="uiDatabaseInfo"></div>
-<script>
-</script>
 
 
 
@@ -39,25 +37,23 @@ current [non-dialog] passage, unless it calls:
   [Re-Render Current Passage] Engine.show()
 -->
 
-:: uiUndo [.ui nostats]
+:: uiBackward [.ui nostats] {"position":"325,0"}
+/* Code is in PassageDone because we need it to run every time a 
+passage is done rendering. */
 <-
-<<script>>
-$("li#undoTab").click(() => Engine.backward());
-<</script>>
 
-:: uiRedo [.ui nostats]
+:: uiForward [.ui nostats] {"position":"425,0"}
+/* Code is in PassageDone because we need it to run every time a 
+passage is done rendering. */
 ->
-<<script>>
-$("li#redoTab").click(() => Engine.forward());
-<</script>>
 
-:: uiSettings [.ui nostats]
+:: uiSettings [.ui nostats] {"position":"525,0"}
 ⚙️
 <<script>>
 $("li#settingsTab").click(() => UI.settings());
 <</script>>
 
-:: uiDisableContent [.ui nostats]
+:: uiDisableContent [.ui nostats] {"position":"625,0"}
 ❌
 <<script>>
 $("li#disableContentsTab").click(() => {
@@ -67,19 +63,19 @@ $("li#disableContentsTab").click(() => {
 });
 <</script>>
 
-:: uiSaves [.ui nostats]
+:: uiSaves [.ui nostats] {"position":"725,0"}
 💾
 <<script>>
 $("li#savesTab").click(() => UI.saves());
 <</script>>
 
-:: uiRestart [.ui nostats]
+:: uiRestart [.ui nostats] {"position":"825,0"}
 🔁
 <<script>>
 $("li#restartTab").click(() => {UI.restart()});
 <</script>>
 
-:: uiCredits [.ui nostats]
+:: uiCredits [.ui nostats] {"position":"925,0"}
 📜
 <<script>>
 $("li#creditsTab").click(() => {
@@ -89,7 +85,7 @@ $("li#creditsTab").click(() => {
 });
 <</script>>
 
-:: uiDev [.ui nostats]
+:: uiDev [.ui nostats] {"position":"1025,0"}
 🛠️
 <<script>>
 if (Config.debug) {
@@ -103,7 +99,7 @@ if (Config.debug) {
 }
 <</script>>
 
-:: uiKnowledge [.ui nostats]
+:: uiKnowledge [.ui nostats] {"position":"1125,0"}
 📖
 <<script>>
 $("li#knowledgeTab").click(() => {
@@ -113,7 +109,7 @@ $("li#knowledgeTab").click(() => {
 });
 <</script>>
 
-:: uiPeople [.ui nostats]
+:: uiPeople [.ui nostats] {"position":"1225,0"}
 🧑🏻‍🤝‍🧑🏻
 <<script>>
 $("li#peopleTab").click(() => {
@@ -123,7 +119,7 @@ $("li#peopleTab").click(() => {
 });
 <</script>>
 
-:: uiDatabaseInfo [.ui nostats]
+:: uiDatabaseInfo [.ui nostats] {"position":"1425,0"}
 <span id="database-text"></span>
 <<script>>
 if (State.variables.user.logged_in) {
@@ -138,7 +134,7 @@ if (State.variables.user.logged_in) {
 }
 <</script>>
 
-:: uiAfterwards [.ui nostats]
+:: uiAfterwards [.ui nostats] {"position":"1325,0"}
 Afterwards
 <<script>>
 if (State.variables.ft_dev_ending) {
@@ -154,8 +150,9 @@ if (State.variables.ft_dev_ending) {
 }
 <</script>>
 
-:: uiBottomText [.ui nostats]
-/* TODO: Put btotom text containing the story and maybe the itch link or something. */
-Twine Template
-by
-LeahPeach
+:: uiBottomText [.ui nostats] {"position":"225,0"}
+<<script>>
+$(output).wiki(`You're reading <span style="text-decoration:underline">${Story.title}</span> by <a href="https://leahiel.itch.io/" target="_blank" rel="noreferrer noopener">LeachPeach↗</a>
+<br><br>
+Interested in more fantasy smut? Find my other games at <a href="https://leahiel.itch.io/" target="_blank" rel="noreferrer noopener">Itch.io</a>.`);
+<</script>>

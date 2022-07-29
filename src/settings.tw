@@ -1,9 +1,9 @@
-:: StoryTitle [.initialize] {"position":"0,675"}
-My Twine Story
+:: StoryTitle [.initialize] {"position":"0,0"}
+Twine Template
 
 
 
-:: StoryData [.initialize] {"position":"0,700"}
+:: StoryData [.initialize] {"position":"0,100"}
 {
 	"ifid": "26A935CA-F6DD-46B0-A9E5-E73331379B61",
     "format": "SugarCube",
@@ -12,17 +12,17 @@ My Twine Story
 
 
 
-:: StorySubtitle [.initialize] {"position":"0,725"}
+:: StorySubtitle [.initialize] {"position":"0,200"}
 
 
 
 
-:: StoryAuthor [.initialize] {"position":"0,750"}
+:: StoryAuthor [.initialize] {"position":"0,300"}
 LeahPeach
 
 
 
-:: StoryInit [.initialize] {"position":"0,775"}
+:: StoryInit [.initialize] {"position":"0,400"}
 /* Everything here is only called once, when the story is initialized.
 This is great for variables and settings. */
 
