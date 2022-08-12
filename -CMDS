@@ -1,3 +1,5 @@
+https://tauri.app/v1/guides/building/cross-platform
+
 # Hot Rebuild on Change:
 <!-- `-t` enables test mode. Delete if desired. -->
 tweegoc -o index.html src -l -w -t
@@ -41,6 +43,8 @@ git push origin master
 git remote add origin https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git
 git remote add upstream https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git
 
+## Force git to Update gitignore
+git rm -r --cached .
 
 
 # Build for Release:

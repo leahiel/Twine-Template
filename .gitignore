@@ -1,19 +1,13 @@
 # Ignore Tagged Files
-# -*
+-notes/
 
-# Ignore VSCode Configuration Files
-# /.vscode
-# t3lt.twee-config.yml
-
-# Ignore Node Generated Files
+# Ignore Generated Files
 **/node_modules
 package-lock.json
+out/**
 
 # Ignore Built Files
 pre-build/*-win32-x64
 pre-build/*-linux-x64
 pre-build/*-darwin-x64
 pre-build/*-mas-x64
-
-# Ignore Things I Don't Have Permission to Share
--notes/secretfiles/

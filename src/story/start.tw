@@ -1,45 +1,42 @@
-:: Start [@0 start nostats] {"position":"400,300"}
-<<bg "src/assets/img/mangroves.jpeg" 0.70>>
+:: Start [@0 start nostats] {"position":"275,200"}
+<<bg "src/assets/img/bg/sanddunes1.jpg" 0.2>>
 
-<<set _pronouns to "">>
+<<set _pronouns to "female">>
 
-<h3>This is a template to show how I've set up my stories for Twine, using Tweego and SugarCube. See 
-<<link Credits>>
-	<<script>>
-	    Dialog.setup();
-	    Dialog.wiki(Story.get("CreditsText").processText());
-	    Dialog.open();
-	<</script>>
-<</link>> for more information.</h3>
-
+<h3>The Lucky Elixir</h3>
+<<img "src/assets/img/_vertical_potion.png" verti-right false>>
+<br>
+You find yourself wanting to get extra lucky recently, so you head to the Tower of Miraj to pick up an Elixir you ordered...
 <br>
 <br>
-<h4><label>Name thyself:   <<textbox "$pc_name" "Leah">></label></h4>
+<h4><label>Name thyself:   <<textbox "$pc_name" "Valis">></label></h4>
 <br> 
 <label>Which set of pronouns do you prefer? 
-	/* NEXT: Make the variable value different from these visible values. */
 	<<cycle "_pronouns" "autoselect">>
-		<<option "he/him/his">>
-		<<option "she/her/hers">>
-		<<option "they/them/theirs">>
+		<<option "she/her/hers" "female">>
+		<<option "he/him/his" "male">>
+		<<option "they/them/theirs" "misc">>
 	<</cycle>>.
 </label>
 <br><br>
 <h4>Your body has:</h4>
-<br><label><<checkbox "$pc.penis" false true checked>> An arm.</label>
-<br><label><<checkbox "$pc.breasts" false true autocheck>> Two lumps.</label>
-<br><label><<checkbox "$pc.vagina" false true autocheck>> A hole.</label>
+<br><label><<checkbox "$pc.penis" false true autocheck>> A penis.</label>
+<br><label><<checkbox "$pc.breasts" false true checked>> Breasts.</label>
+<br><label><<checkbox "$pc.vagina" false true checked>> A vagina.</label>
 <br>
-<br><<link [[Time to move on.|Link-Replace-Prepend]]>><</link>>
+<br><<link [[Time to move on.|prologue]]>><</link>>
 
 <<done>>
 	<<script>>
-		settings.pronouns = "he/him/his";
+		settings.pronouns = "female";
 
 		/* Update the settings variable every time it is clicked. */
 		$("a#cycle--pronouns").on("click", () => {
 			settings.pronouns = State.temporary.pronouns;
 			Setting.save();
 		});
+
+		/* When in Test Mode, disable debug views by default. */
+		DebugView.toggle();
 	<</script>>
 <</done>>

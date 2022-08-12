@@ -25,16 +25,15 @@ Macro.add("bg", {
 
         // Just insert the code into whatever style sheet is first lmao.
         let sheet = window.document.styleSheets[0]
-        console.log(sheet)
         // If we just keep inserting more rules into the first place, we'll be in trouble.
         // XXX: Surely there's an issue with this. I'm deleting whatever is at 0 before making sure it's my code...
         // Just gotta find the future bug first...
         sheet.deleteRule(0);
+        // NEXT: I should have this transition nicely.
         sheet.insertRule(`
             html {
                 background-image: linear-gradient(rgba(0, 0, 0, ${this.args[1]}), rgba(0, 0, 0, ${this.args[1]})), url(${this.args[0]});
                 background-size: cover;
-                height: 100vh;
             }
         `, 0);
     }

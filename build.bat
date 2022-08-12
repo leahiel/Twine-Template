@@ -1,5 +1,5 @@
 @ECHO OFF
-SET storyname=fieldbiologist
+SET storyname=mytwinestory
  
 ::-------------------------------------
 REM --> Check for permissions
@@ -65,15 +65,16 @@ CALL npx electron-packager --platform=linux ./
 CALL "C:\Program Files\7-Zip\7z.exe" a -tzip "..\out\%storyname%-linux-x64.zip" %storyname%-linux-x64
 rmdir /s /q "%storyname%-linux-x64\"
 ECHO: 
-ECHO Compiling darwin (REQUIRES ADMIN)
+ECHO Compiling darwin (DISABLED) (REQUIRES ADMIN)
 ECHO ================================================
-CALL npx electron-packager --platform=darwin ./ 
-CALL "C:\Program Files\7-Zip\7z.exe" a -tzip "..\out\%storyname%-darwin-x64.zip" %storyname%-darwin-x64
-rmdir /s /q "%storyname%-darwin-x64\"
+:: we need to get symlinks working for this to work.
+:: REM CALL npx electron-packager --platform=darwin ./ 
+:: REM CALL "C:\Program Files\7-Zip\7z.exe" a -tzip "..\out\%storyname%-darwin-x64.zip" %storyname%-darwin-x64
+:: REM rmdir /s /q "%storyname%-darwin-x64\"
 ECHO:
 ECHO Compiling mas (DISABLED)
 ECHO ================================================
 :: CALL npx electron-packager --platform=mas ./    
 :: CALL "C:\Program Files\7-Zip\7z.exe" a -tzip "..\out\%storyname%-mas-x64.zip" %storyname%-mas-x64
 :: rmdir /s /q "%storyname%-mas-x64\"
-EXIT /B
+PAUSE

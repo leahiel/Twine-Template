@@ -9,6 +9,7 @@
   --link-text: hsl(223, 64%, 63%);
   --warning-color: hsl(0, 39%, 51%);
   --tabTransition: font-size 0.35s, opacity 0.35s, visibility 0.35s;
+  --boxShadow: 0 2px 8px rgb(0 0 0 / 50%);
 }
 
 /*  
@@ -76,7 +77,7 @@ body {
   margin-left: auto;
   margin-right: auto;
 
-  box-shadow: 0 2px 8px rgb(0 0 0 / 50%);
+  box-shadow: var(--boxShadow);
   border-radius: 20px;
 
   font-size: 20px;
@@ -114,6 +115,16 @@ input[type=text] {
   max-width: 100%;
 }
 
+button {
+  box-shadow:var(--boxShadow);
+  border-radius: 8px;
+}
+
+select {
+  box-shadow:var(--boxShadow);
+  border-radius: 2px;
+}
+
 /* 
 ##     ## ####  
 ##     ##  ##   
@@ -127,6 +138,7 @@ input[type=text] {
 .knowledge {
   display: block;
 
+  margin-top: 1.5rem;
   margin-left: 1rem;
   margin-bottom: -1.25rem;
 
@@ -181,7 +193,7 @@ input[type=text] {
   margin-left: auto;
   margin-right: auto;
 
-  box-shadow: 0 2px 8px rgb(0 0 0 / 50%);
+  box-shadow:var(--boxShadow);
   border-radius: 20px;
   
   background-color: rgb(40, 40, 40);
@@ -198,7 +210,7 @@ input[type=text] {
 
   /* margin-top: 2rem; */
   background-color: rgb(25, 25, 25);
-  box-shadow: 0 2px 8px rgb(0 0 0 / 50%);
+  /* box-shadow:var(--boxShadow); */
   border-radius: 20px;
   padding: 1.5rem 2rem;
 }
@@ -211,7 +223,7 @@ input[type=text] {
   padding: 1.25rem .75rem 0rem;
 
   background-color: hsl(0, 0%, 15%);
-  box-shadow: 0 2px 8px rgb(0 0 0 / 50%);
+  box-shadow:var(--boxShadow);
   border-radius: 12px;
 
   height: 4vh;
@@ -238,7 +250,7 @@ input[type=text] {
   margin-right: 300rem;
   padding: .75rem .5rem .75rem 2.75rem;
   
-  box-shadow: 0 2px 8px rgb(0 0 0 / 50%);
+  box-shadow:var(--boxShadow);
   border-radius: 20px;
 
   background-color: hsl(0, 0%, 15%);
@@ -318,7 +330,7 @@ input[type=text] {
   padding: 1rem 1.25rem 1rem .75rem;
 
   background-color: hsl(0, 0%, 15%);
-  box-shadow: 0 2px 8px rgb(0 0 0 / 50%);
+  box-shadow:var(--boxShadow);
   border-radius: 20px;
 
   margin-top: 1rem;
@@ -363,16 +375,280 @@ input[type=text] {
 }
 
 /* 
- ######   #######  ##    ## ######## ######## ##    ## ########    ########  ####    ###    ########  ##       ######## 
-##    ## ##     ## ###   ##    ##    ##       ###   ##    ##       ##     ##  ##    ## ##   ##     ## ##       ##       
-##       ##     ## ####  ##    ##    ##       ####  ##    ##       ##     ##  ##   ##   ##  ##     ## ##       ##       
-##       ##     ## ## ## ##    ##    ######   ## ## ##    ##       ##     ##  ##  ##     ## ########  ##       ######   
-##       ##     ## ##  ####    ##    ##       ##  ####    ##       ##     ##  ##  ######### ##     ## ##       ##       
-##    ## ##     ## ##   ###    ##    ##       ##   ###    ##       ##     ##  ##  ##     ## ##     ## ##       ##       
- ######   #######  ##    ##    ##    ######## ##    ##    ##       ########  #### ##     ## ########  ######## ######## 
+########  ####    ###    ##        #######   ######   
+##     ##  ##    ## ##   ##       ##     ## ##    ##  
+##     ##  ##   ##   ##  ##       ##     ## ##        
+##     ##  ##  ##     ## ##       ##     ## ##   #### 
+##     ##  ##  ######### ##       ##     ## ##    ##  
+##     ##  ##  ##     ## ##       ##     ## ##    ##  
+########  #### ##     ## ########  #######   ######   
+*/
+
+#ui-overlay.open {
+  opacity: .75;
+}
+
+#ui-dialog-titlebar {
+  border-radius: 20px 20px 0 0;
+}
+
+#ui-dialog-title {
+  font-family: Helmet, Freesans, sans-serif;
+  text-transform: initial;
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: underline 2px;
+  padding: 0.4rem 0;
+}
+
+#ui-dialog-body {
+  border-radius: 0 0 20px 20px;
+  border: none;
+
+  line-height: 1.25;
+  min-width: initial;
+
+  box-shadow:var(--boxShadow);
+  background-color: rgb(25, 25, 25);
+}
+
+#ui-dialog-close {
+  width: 2.6rem;
+  border-top-right-radius: 20px;
+}
+
+#ui-dialog-body ul.buttons {
+  text-align: right;
+}
+
+#ui-dialog-body.saves td {
+  padding: 0.5vh 3vw;
+}
+
+/* 
+#### ##     ##    ###     ######   ########  ######  
+ ##  ###   ###   ## ##   ##    ##  ##       ##    ## 
+ ##  #### ####  ##   ##  ##        ##       ##       
+ ##  ## ### ## ##     ## ##   #### ######    ######  
+ ##  ##     ## ######### ##    ##  ##             ## 
+ ##  ##     ## ##     ## ##    ##  ##       ##    ## 
+#### ##     ## ##     ##  ######   ########  ######  
+*/
+
+img {
+  border-radius: 8px;
+
+  max-width: inherit;
+  max-height: inherit;
+  height: inherit;
+  width: inherit;
+  object-fit: cover;
+}
+
+imghori {
+display: flex;
+overflow: hidden;
+
+max-height: 45vh;
+max-width: 65vw;
+width: max-content;
+
+margin: 1rem auto;
+padding: .45rem;
+
+border: 1px solid black;
+border-radius: 8px;
+box-shadow: inset 0 0 0 10px hsl(0deg 0% 35% / 60%);
+}
+
+imgverti {
+  display: flex;
+  overflow: hidden;
+
+  margin: auto 1rem;
+
+  max-height: 40vh;
+  width: max-content;
+  max-width: 35vw;
+  width: max-content;
+
+  padding: .45rem;
+
+  border: 1px solid black;
+  border-radius: 8px;
+  box-shadow: inset 0 0 0 10px hsl(0deg 0% 35% / 60%);
+}
+
+.blurred {
+  filter: blur(2vw) grayscale(20%) brightness(80%); 
+  -webkit-filter: blur(2vw) grayscale(20%) brightness(80%); 
+}
+
+
+
+/* 
+GRIDS
+*/
+
+gridcontainer {
+  display: grid;
+  row-gap: 1rem;
+  column-gap: 1rem;
+  --columns: 3; /* Max number of columns in grid */
+  grid-template-columns: repeat(auto-fill, minmax(max(200px, 96%/var(--columns)), 1fr));
+
+  margin-top: 1rem;
+  padding: 4px 12px 8px;
+  border: 1px solid hsl(312deg 74% 16% / 0%);
+  border-radius: 8px;
+  /* box-shadow: var(--boxShadow); */
+  background-color: var(--background);
+}
+
+gridcontainer h2 {
+  grid-column: 1/-1;
+
+  border-radius: 8px;
+  box-shadow: var(--boxShadow);
+  margin: 0 10vw -.5rem;
+
+  text-align: center;
+  color: var(--backgroundplus1);
+  background-image: var(--middletodarkgradiant);
+}
+
+gridcontainer a {
+  padding: 1rem 1.5rem 1.5rem;
+  border: 1px solid hsl(312deg 74% 16% / 0%);
+  border-radius: 8px;
+  box-shadow: var(--boxShadow);
+
+  text-align: left;
+  text-decoration: none;
+  color: var(--maintext);
+
+  transition: all .45s cubic-bezier(0.25, 1, 0.2, 1);
+
+  /* Gradiant Transition Hack Stuff */
+  position: relative;
+
+  z-index: 1;
+  background: var(--background);
+}
+
+gridcontainer a::before {
+  /* Gradiant Transition Hack Stuff */
+  position: absolute;
+
+  content: "";
+  opacity: 0;
+  z-index: -1;
+
+  border-radius: 8px;
+
+  top: -1px;
+  right: -1px;
+  bottom: -1px;
+  left: -1px;
+
+  background: var(--middletodarkgradiant);
+
+  transition: all .45s cubic-bezier(0.25, 1, 0.2, 1);
+}
+
+gridcontainer a:hover {
+  border-radius: 8px;
+  box-shadow: 8px 8px 24px 0 var(--middle);
+
+  color:hsl(0, 0%, 90%);
+}
+
+gridcontainer a:hover::before {
+  /* Gradiant Transition Hack Stuff */
+  opacity: 1;
+}
+
+gridwrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  width: 100%;
+
+  margin-bottom: 1rem;
+}
+
+a gridhelper {
+  justify-self: flex-end;
+
+  padding: .2rem .7rem;
+  border-radius: 8px;
+  box-shadow: 2px 2px 8px 0 hsla(0, 0%, 0%, 0.3);
+
+  text-align: right;
+  font-size: .9rem;
+  color: var(--backgroundplus1);
+  background-color: var(--middle);
+
+  transition: all .45s cubic-bezier(0.25, 1, 0.2, 1);
+}
+
+imgcont {
+  height: 8vh;
+  width: 8vh;
+}
+
+gridcontainer a img {
+  justify-self: flex-start;
+
+  background-size: cover;
+
+  filter: brightness(0) saturate(100%) invert(54%) sepia(39%) saturate(1555%) hue-rotate(199deg) brightness(91%) contrast(90%);
+}
+
+gridcontainer a:hover img {
+  filter: invert(98%) sepia(2%) saturate(1971%) hue-rotate(204deg) brightness(114%) contrast(80%);
+}
+
+a gridtitle {
+  display: block;
+
+  margin-bottom: .2rem;
+
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+griddescript {
+  color: #68D;
+
+  font-size: 1.1rem;
+  text-decoration-color: #68D;
+}
+
+
+
+/* 
+ ######   #######  ##    ## ######## ######## ##    ## ######## 
+##    ## ##     ## ###   ##    ##    ##       ###   ##    ##    
+##       ##     ## ####  ##    ##    ##       ####  ##    ##    
+##       ##     ## ## ## ##    ##    ######   ## ## ##    ##    
+##       ##     ## ##  ####    ##    ##       ##  ####    ##    
+##    ## ##     ## ##   ###    ##    ##       ##   ###    ##    
+ ######   #######  ##    ##    ##    ######## ##    ##    ##    
+
+########  ####  ######     ###    ########  ##       ########   
+##     ##  ##  ##    ##   ## ##   ##     ## ##       ##         
+##     ##  ##  ##        ##   ##  ##     ## ##       ##         
+##     ##  ##   ######  ##     ## ########  ##       ######     
+##     ##  ##        ## ######### ##     ## ##       ##         
+##     ##  ##  ##    ## ##     ## ##     ## ##       ##         
+########  ####  ######  ##     ## ########  ######## ########  
  */
 
-.fetishtitle {
+.contentdisabletitle {
   padding-left: 1rem;
 
   font-size: 1.1rem;
@@ -382,7 +658,7 @@ input[type=text] {
 .subtext {
   color: hsl(0, 0%, 50%);
 
-  font-size: 0.7rem;
+  font-size: 0.9rem;
   vertical-align: middle;
   text-align: justify;
 }
@@ -392,7 +668,7 @@ input[type=text] {
   vertical-align: middle;
 }
 
-.fet-disabled {
+.cont-disabled {
   display: none;
 }
 

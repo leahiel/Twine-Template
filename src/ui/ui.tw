@@ -1,4 +1,4 @@
-:: StoryInterface [.ui nostats] {"position":"125,0"}
+:: StoryInterface [.ui nostats] {"position":"0,475"}
 <div id="mainwrapper">
     <div id="passages"></div>
     <div id="wrapperBottomText" data-passage="uiBottomText"></div>
@@ -37,60 +37,60 @@ current [non-dialog] passage, unless it calls:
   [Re-Render Current Passage] Engine.show()
 -->
 
-:: uiBackward [.ui nostats] {"position":"325,0"}
+:: uiBackward [.ui nostats] {"position":"0,500"}
 /* Code is in PassageDone because we need it to run every time a 
 passage is done rendering. */
 <-
 
-:: uiForward [.ui nostats] {"position":"425,0"}
+:: uiForward [.ui nostats] {"position":"0,525"} 
 /* Code is in PassageDone because we need it to run every time a 
 passage is done rendering. */
 ->
 
-:: uiSettings [.ui nostats] {"position":"525,0"}
+:: uiSettings [.ui nostats] {"position":"0,550"}
 ⚙️
 <<script>>
 $("li#settingsTab").click(() => UI.settings());
 <</script>>
 
-:: uiDisableContent [.ui nostats] {"position":"625,0"}
+:: uiDisableContent [.ui nostats] {"position":"0,575"}
 ❌
 <<script>>
 $("li#disableContentsTab").click(() => {
-    Dialog.setup();
-    Dialog.wiki(Story.get("FetishPicker").processText());
+    Dialog.setup("Disable Content");
+    Dialog.wiki(Story.get("ContentDisabler").processText());
     Dialog.open();
 });
 <</script>>
 
-:: uiSaves [.ui nostats] {"position":"725,0"}
+:: uiSaves [.ui nostats] {"position":"0,600"}
 💾
 <<script>>
 $("li#savesTab").click(() => UI.saves());
 <</script>>
 
-:: uiRestart [.ui nostats] {"position":"825,0"}
+:: uiRestart [.ui nostats] {"position":"0,625"}
 🔁
 <<script>>
 $("li#restartTab").click(() => {UI.restart()});
 <</script>>
 
-:: uiCredits [.ui nostats] {"position":"925,0"}
+:: uiCredits [.ui nostats] {"position":"0,650"}
 📜
 <<script>>
 $("li#creditsTab").click(() => {
-    Dialog.setup();
+    Dialog.setup("Credits");
     Dialog.wiki(Story.get("CreditsText").processText());
     Dialog.open();
 });
 <</script>>
 
-:: uiDev [.ui nostats] {"position":"1025,0"}
+:: uiDev [.ui nostats] {"position":"0,675"}
 🛠️
 <<script>>
 if (Config.debug) {
     $("li#devTab").click(() => {
-        Dialog.setup();
+        Dialog.setup("Debug Menu Deluxe");
         Dialog.wiki(Story.get('DevOptionsText').processText());
         Dialog.open();
     });
@@ -99,27 +99,27 @@ if (Config.debug) {
 }
 <</script>>
 
-:: uiKnowledge [.ui nostats] {"position":"1125,0"}
+:: uiKnowledge [.ui nostats] {"position":"0,700"}
 📖
 <<script>>
 $("li#knowledgeTab").click(() => {
-    Dialog.setup();
+    Dialog.setup("Knowledge Base");
     Dialog.wiki(Story.get("KnowledgeText").processText());
     Dialog.open();
 });
 <</script>>
 
-:: uiPeople [.ui nostats] {"position":"1225,0"}
+:: uiPeople [.ui nostats] {"position":"0,725"}
 🧑🏻‍🤝‍🧑🏻
 <<script>>
 $("li#peopleTab").click(() => {
-    Dialog.setup();
+    Dialog.setup("Person Base");
     Dialog.wiki(Story.get("PeopleText").processText());
     Dialog.open();
 });
 <</script>>
 
-:: uiDatabaseInfo [.ui nostats] {"position":"1425,0"}
+:: uiDatabaseInfo [.ui nostats] {"position":"0,750"}
 <span id="database-text"></span>
 <<script>>
 if (State.variables.user.logged_in) {
@@ -134,7 +134,7 @@ if (State.variables.user.logged_in) {
 }
 <</script>>
 
-:: uiAfterwards [.ui nostats] {"position":"1325,0"}
+:: uiAfterwards [.ui nostats] {"position":"0,775"}
 Afterwards
 <<script>>
 if (State.variables.ft_dev_ending) {
@@ -150,9 +150,9 @@ if (State.variables.ft_dev_ending) {
 }
 <</script>>
 
-:: uiBottomText [.ui nostats] {"position":"225,0"}
+:: uiBottomText [.ui nostats] {"position":"0,800"}
 <<script>>
-$(output).wiki(`You're reading <span style="text-decoration:underline">${Story.title}</span> by <a href="https://leahiel.itch.io/" target="_blank" rel="noreferrer noopener">LeachPeach↗</a>
+$(output).wiki(`You're reading <span style="text-decoration:underline">${Story.title}</span> by <a href="https://leahiel.itch.io/" target="_blank" rel="noreferrer noopener">LeahPeach↗</a>
 <br><br>
-Interested in more fantasy smut? Find my other games at <a href="https://leahiel.itch.io/" target="_blank" rel="noreferrer noopener">Itch.io</a>.`);
+Interested in more fantasy smut? Find my other games at <a href="https://leahiel.itch.io/" target="_blank" rel="noreferrer noopener">Itch.io</a>. Feel free to follow me if you'd like to be notified of my future games as well!`);
 <</script>>

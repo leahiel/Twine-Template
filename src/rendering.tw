@@ -1,4 +1,4 @@
-:: PassageReady [.rendering] {"position":"125,125"}
+:: PassageReady [.rendering] {"position":"250,475"}
 /* Everything here is done before every passage begins rendering.
 Best for checking variables and whatnot. */
 <<script>>
@@ -35,10 +35,11 @@ function settingsHandler() {
     Template.delete("wizard");
     Template.delete("wizards");
     Template.delete("boy");
+    Template.delete("man");
   }
 
   switch (settings.pronouns) {
-    case "he/him/his":
+    case "male":
       Template.add("he", "he");
       Template.add("him", "him");
       Template.add("his", "his");
@@ -47,8 +48,9 @@ function settingsHandler() {
       Template.add("wizard", "wizard");
       Template.add("wizards", "wizards");
       Template.add("boy", "boy");
+      Template.add("man", "man");
       break;
-    case "she/her/hers":
+    case "female":
       Template.add("he", "she");
       Template.add("him", "her");
       Template.add("his", "her");
@@ -57,9 +59,10 @@ function settingsHandler() {
       Template.add("wizard", "witch");
       Template.add("wizards", "witches");
       Template.add("boy", "girl");
+      Template.add("man", "woman");
       break;
     default:
-      /* Assume "they/them/theirs": */
+      /* Assume "misc": */
       Template.add("he", "they");
       Template.add("him", "them");
       Template.add("his", "their");
@@ -67,14 +70,14 @@ function settingsHandler() {
       Template.add("Mister", "Gentleperson");
       Template.add("wizard", "wizard");
       Template.add("wizards", "wizards");
-      Template.add("boy", "kid");
+      Template.add("man", "guy");
   }
 }
 <</script>>
 
 
 
-:: PassageHeader [.rendering] {"position":"125,225"}
+:: PassageHeader [.rendering] {"position":"250,500"}
 /* Everything here is rendered at the start of every passage rendering. 
 It's intended for actual rendering stuff. */
 <div id="chapterheader">Chapter Header Text</div>
@@ -82,13 +85,13 @@ It's intended for actual rendering stuff. */
 
 
 
-:: PassageFooter [.rendering] {"position":"125,325"}
+:: PassageFooter [.rendering] {"position":"250,525"}
 /* Everything here is rendered at the end of every passage rendering.
 It's intended for actual rendering stuff. */
 
 
 
-:: PassageDone [.rendering] {"position":"125,425"}
+:: PassageDone [.rendering] {"position":"250,550"}
 /* Everything here is done after each passage is rendered. Best for 
 event handlers and the like. */
 <<script>>
@@ -108,11 +111,15 @@ let curPsgChapter = "Unknown Chapter";
 
 // Chapter Title Names
 let chaptertitles = {
-    "@0": "The Field Biologist",
-    "@1": "The Newbie and The Decision",
-    "@2": "Camping",
-    "@3": "Beetles",
-    "@4": "Dev Message",
+    "@0": "The Lucky Elixir",
+    "@1": "The Elixir",
+    "@2": "Of a Pin and Vials",
+    "@3": "An Orc and a Scry",
+    "@hub": "City Menu",
+    "@inn": "Meerkat Manor",
+    "@scry": "Scrying",
+    "@beach": "The Oasis",
+    "@forest": "Forest"
 };
 
 Object.keys(chaptertitles).forEach(key => {
@@ -130,7 +137,7 @@ $('span#passagetitleheader').text(curPsgTitle);
 
 /* Create an event handler that checks every time an element is added.
 If that element is a <<link>>, check if the passage tags it links 
-to. If they are on the fetish lists, disable them or flag them for
+to. If they are on the bad content lists, disable them or flag them for
 a warning. */
 const targetNode = document.getElementById('passages');
 const config = {
@@ -147,7 +154,7 @@ const callback = function(mutationList, observer) {
     let linkarr = $('.macro-link').toArray();
     linkarr.forEach(link => {
 
-      if (!$(link).hasClass('fet-disabled') && !$(link).hasClass('fet-warning')) {
+      if (!$(link).hasClass('cont-disabled') && !$(link).hasClass('cont-warning')) {
         let psgTitle = $(link).attr("data-passage");
 
         /* Ensure we have a title, and rendering has finished. */
@@ -158,33 +165,33 @@ const callback = function(mutationList, observer) {
         /* Check Disables */
         psgTags.forEach(function(tag) {
           if (State.variables.ft_disable.includes(tag)) {
-            /* Adding the .fet-disabled class will add the css rule
+            /* Adding the .cont-disabled class will add the css rule
             "display: none", hiding the element. */
-            $(link).addClass("fet-disabled");
+            $(link).addClass("cont-disabled");
           }
         });
 
         /* Check Warnings */
         psgTags.forEach(function(tag) {
           if (State.variables.ft_warning.includes(tag)) {
-              /* Adding the .fet-warning class will add the css rule
-              some css and allow us to show warnings. */
-              $(link).addClass("fet-warning");
+              /* Adding the .cont-warning class will add the some css 
+              and allow us to show warnings. */
+              $(link).addClass("cont-warning");
               
-              /* Add qualifying tags to the 'fet-warning' attribute so
-              we know which fetishes we're warning the user about. */
-              if (typeof $(link).attr('fet-warning') === "undefined") {
-                  $(link).attr('fet-warning', tag);
+              /* Add qualifying tags to the 'cont-warning' attribute so
+              we know which content we're warning the user about. */
+              if (typeof $(link).attr('cont-warning') === "undefined") {
+                  $(link).attr('cont-warning', tag);
               } else {
-                  let tmp = " " + $(link).attr('fet-warning');
-                  $(link).attr('fet-warning', tag + tmp);
+                  let tmp = " " + $(link).attr('cont-warning');
+                  $(link).attr('cont-warning', tag + tmp);
               }
           }
 
-          if ($(link).attr('fet-warning') != undefined) {
-            let fetarr = $(link).attr('fet-warning').split(' ');
-            fetarr =  [...new Set(fetarr)];
-            $(link).append("<br><span class='warning-link'>Warning: This link contains the following content: " + fetarr + "</span>");
+          if ($(link).attr('cont-warning') !== undefined && !$(link).children('span').hasClass('warning-link')) {
+            let contarr = $(link).attr('cont-warning').split(' ');
+            contarr =  [...new Set(contarr)];
+            $(link).append("<br><span class='warning-link'>Warning: This link contains the following content: " + contarr + "</span>");
           }
           
           /* WARNING: This may make us unable to check for changes on link replace. */
@@ -202,6 +209,14 @@ const observer = new MutationObserver(callback);
 /* Start observing the target node for configured mutations */
 observer.observe(targetNode, config);
 
+/* Unblur images on click. */
+jQuery('img, imghori, imgverti').on('click', function(e) {
+  e.preventDefault();
+  if ($(this).hasClass('blurred')) {
+    jQuery(this).toggleClass('blurred');
+  }
+});
+
 
 /* Initalize tooltips. */
 $(document).ready(function() {
@@ -212,26 +227,37 @@ $(document).ready(function() {
 });
 
 /* Discourage Forward/Backward if not usable. */
-$("li#forwardTab")
+if (typeof $._data( $("li#forwardTab")[0], "events") === "undefined") {
+  $("li#forwardTab")
     .ariaDisabled(State.length === State.size)
-	  .ariaClick({}, () => Engine.forward());
+    .ariaClick({one: true}, () => Engine.forward());
+} else {
+  $("li#forwardTab")
+    .ariaDisabled(State.length === State.size);
+}
+
 if ($("li#forwardTab").ariaIsDisabled()) {
     $("li#forwardTab").css("color", "grey");
     $("li#forwardTab").css("cursor", "not-allowed");
 } else {
     $("li#forwardTab").css("color", "inherit");
-    $("li#forwardTab").css("cursor", "inherit");
+    $("li#forwardTab").css("cursor", "pointer");
 }
 
-$("li#backwardTab")
+if (typeof $._data( $("li#backwardTab")[0], "events") === "undefined") {
+  $("li#backwardTab")
     .ariaDisabled(State.length < 2)
-    .ariaClick({}, () => Engine.backward());
+	  .ariaClick({one: true}, () => Engine.backward());
+} else {
+  $("li#backwardTab")
+    .ariaDisabled(State.length < 2);
+}
+
 if ($("li#backwardTab").ariaIsDisabled()) {
     $("li#backwardTab").css("color", "grey");
     $("li#backwardTab").css("cursor", "not-allowed");
 } else {
     $("li#backwardTab").css("color", "inherit");
-    $("li#backwardTab").css("cursor", "inherit");
+    $("li#backwardTab").css("cursor", "pointer");
 }
-
 <</script>>

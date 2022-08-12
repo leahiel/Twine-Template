@@ -18,3 +18,7 @@ sugarcube-2:
       # My custom macro to set HTML backgrounds
       name: bg
       container: false
+    img:
+      # My custom macro for inpassage images
+      name: img
+      container: false

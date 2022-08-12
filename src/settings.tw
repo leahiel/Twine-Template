@@ -5,7 +5,7 @@ Twine Template
 
 :: StoryData [.initialize] {"position":"0,100"}
 {
-	"ifid": "26A935CA-F6DD-46B0-A9E5-E73331379B61",
+	"ifid": "5AE42077-63F3-4A3B-A076-E27B680A4DB8",
     "format": "SugarCube",
     "format-version": "2.36.1"
 }
@@ -61,6 +61,7 @@ function add_tooltip (macroname, passage, metaname = false) {
     });
 };
 
+
 /*
 ########     ###    ########    ###    ########     ###     ######  ######## 
 ##     ##   ## ##      ##      ## ##   ##     ##   ## ##   ##    ## ##       
@@ -88,6 +89,20 @@ State.variables.user.logged_in = false;
 /* Important variables that are hopefully one day transferable across stories. */
 State.variables.meta = {};
 State.variables.meta.psgsthatsentdb = [];
+
+
+/* Discord Widget */
+if (!Config.debug) {
+    importScripts('https://cdn.jsdelivr.net/npm/@widgetbot/crate@3')
+        .then(() => {
+            new Crate({ 
+              server: '1001698951516397590', /* LeahPeach Stories */
+              channel: '1001708306416533514' /* #📣┊announcements  */
+            }) 
+        })
+    ;
+}
+
 
 /* Useful if you have server-side stuff that you're doing. */
 importScripts(["src/assets/js/uuid.min.js", "src/assets/js/game_ssr.js"])
@@ -145,7 +160,6 @@ importScripts(["src/assets/js/uuid.min.js", "src/assets/js/game_ssr.js"])
         }).then(() => {
             /* Set our client as logged in. */
             State.variables.user.logged_in = true;
-            UIBar.update();
             Engine.show(); // to rerun <<setmeta>>
         });
 
@@ -235,6 +249,10 @@ Setting.addToggle("bgimg", {
 });
 settings.bgimg = true;
 
+// TODO:
+// Toggle to hide images.
+// Toggle to turn off image blurring.
+
 // Toggle option for tooltips.
 Setting.addToggle("tooltips", {
     label: "Show tooltips on important text?",
@@ -249,10 +267,10 @@ Setting.save();
 Setting.addList("pronouns", {
     label   : "Preferred Pronouns:",
     list    : [
-        "he/him/his", 
-        "she/her/hers", 
-        "they/them/theirs"],
-    default : "he/him/his",
+        "male", 
+        "female", 
+        "misc"],
+    default : "male",
     onChange: () => { Engine.show() },
 });
 <</script>>
