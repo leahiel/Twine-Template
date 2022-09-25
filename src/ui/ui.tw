@@ -44,7 +44,7 @@ passage is done rendering. */
 
 :: uiForward [.ui nostats] {"position":"0,525"} 
 /* Code is in PassageDone because we need it to run every time a 
-passage is done rendering. */
+passage is done rendering. */ 
 ->
 
 :: uiSettings [.ui nostats] {"position":"0,550"}
@@ -63,11 +63,13 @@ $("li#disableContentsTab").click(() => {
 });
 <</script>>
 
+
 :: uiSaves [.ui nostats] {"position":"0,600"}
 💾
 <<script>>
 $("li#savesTab").click(() => UI.saves());
-<</script>>
+<</script>> 
+
 
 :: uiRestart [.ui nostats] {"position":"0,625"}
 🔁
@@ -128,7 +130,7 @@ if (State.variables.user.logged_in) {
     $("#database-text").text("Disconnected");
     $("#databaseInfoTab").css("cursor", "pointer");
     $("#databaseInfoTab").click(() => {
-        /* NEXT SERVER: We shouldn't open the window directly, rather we should open a dialogue box that tells users things, that has a link with which they can click to open the window. */
+        /* REQUIRED SERVER: We shouldn't open the window directly, rather we should open a dialogue box that tells users things, that has a link with which they can click to open the window. */
         window.open(`https://itch.io/user/oauth?client_id=9a5a87634b363c3ce3908f94c8767e1b&scope=profile%3Ame&response_type=token&redirect_uri=https%3A%2F%2Fmetadb-a53ef.web.app%2Fitch_oauth.html&state=${recall('user-uuid')}&`, "_blank");
     });  
 }
@@ -152,7 +154,6 @@ if (State.variables.ft_dev_ending) {
 
 :: uiBottomText [.ui nostats] {"position":"0,800"}
 <<script>>
-$(output).wiki(`You're reading <span style="text-decoration:underline">${Story.title}</span> by <a href="https://leahiel.itch.io/" target="_blank" rel="noreferrer noopener">LeahPeach↗</a>
-<br><br>
-Interested in more fantasy smut? Find my other games at <a href="https://leahiel.itch.io/" target="_blank" rel="noreferrer noopener">Itch.io</a>. Feel free to follow me if you'd like to be notified of my future games as well!`);
+/* TODO: Make this a db call. Have this as a backup.  Oh, have it call a different DB entry if the game is out of date. */
+$(output).wiki(setup.STR.bottomUIStr);
 <</script>>

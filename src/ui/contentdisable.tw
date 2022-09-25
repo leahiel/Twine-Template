@@ -33,7 +33,7 @@ Please select which content you do not want to encounter.
 </span>
 
 <<done>>
-    /* FIXME: Check the boxes if they're selected. */
+    /* DESIRED: Check the boxes if they're selected. */
 
 	/* Run an event handler that refreshes the passage when an option changes. */
 	<<run 

@@ -1,34 +1,38 @@
 :: Start [@0 start nostats] {"position":"275,200"}
-<<bg "src/assets/img/bg/sanddunes1.jpg" 0.2>>
+<<set _pronouns to "male">>
 
-<<set _pronouns to "female">>
+<gridcontainer>
+<h2>Character Creation</h2>
+	<griditem class="row2">
+		<gridtitle>Basic Settings</gridtitle>
+		<h4><label>Name thyself:   <<textbox "$pc_name" "Valis">></label></h4>
+		<br><br> 
+		<label>Which set of pronouns do you prefer? 
+			<<cycle "_pronouns" "autoselect">>
+				<<option "he/him/his" "male">>
+				<<option "she/her/hers" "female">>
+				<<option "they/them/theirs" "misc">>
+			<</cycle>>
+		</label>
+		<br><br>
+		<h4>Your body has:</h4>
+		<br><label><<checkbox "$pc.penis" false true checked>> A penis.</label>
+		<br><label><<checkbox "$pc.breasts" false true autocheck>> Breasts.</label>
+		<br><label><<checkbox "$pc.vagina" false true autocheck>> A vagina.</label>
+        <griddescript></griddescript>
+	</griditem>
 
-<h3>The Lucky Elixir</h3>
-<<img "src/assets/img/_vertical_potion.png" verti-right false>>
-<br>
-You find yourself wanting to get extra lucky recently, so you head to the Tower of Miraj to pick up an Elixir you ordered...
-<br>
-<br>
-<h4><label>Name thyself:   <<textbox "$pc_name" "Valis">></label></h4>
-<br> 
-<label>Which set of pronouns do you prefer? 
-	<<cycle "_pronouns" "autoselect">>
-		<<option "she/her/hers" "female">>
-		<<option "he/him/his" "male">>
-		<<option "they/them/theirs" "misc">>
-	<</cycle>>.
-</label>
-<br><br>
-<h4>Your body has:</h4>
-<br><label><<checkbox "$pc.penis" false true autocheck>> A penis.</label>
-<br><label><<checkbox "$pc.breasts" false true checked>> Breasts.</label>
-<br><label><<checkbox "$pc.vagina" false true checked>> A vagina.</label>
+	<griditem class="col2">
+        <gridtitle>Setting</gridtitle>
+        <griddescript>After years of work, you finally found yourself with a coveted silver guild rank. This allows you to operate multiple parties at once, which you plan to use to teach multiple groups of newbies new skills that will help them survive the harsh trials of adventure.</griddescript>
+    </griditem>
+</gridcontainer>
 <br>
 <br><<link [[Time to move on.|prologue]]>><</link>>
 
 <<done>>
 	<<script>>
-		settings.pronouns = "female";
+		settings.pronouns = "male";
 
 		/* Update the settings variable every time it is clicked. */
 		$("a#cycle--pronouns").on("click", () => {
@@ -37,6 +41,8 @@ You find yourself wanting to get extra lucky recently, so you head to the Tower 
 		});
 
 		/* When in Test Mode, disable debug views by default. */
-		DebugView.toggle();
+		if (Config.debug) {
+			DebugView.disable();
+		}
 	<</script>>
 <</done>>

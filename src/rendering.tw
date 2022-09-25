@@ -2,11 +2,16 @@
 /* Everything here is done before every passage begins rendering.
 Best for checking variables and whatnot. */
 <<script>>
+/* Ensure correct versioning. */
+if (State.variables.version !== setup.version) {
+  setup.fns.update_save();
+}
+
 /* Set State.variables.ft_people = true if any variable ending in _met is true. */
 if (!State.variables.ft_people) {
   for (let key in State.variables) {
     if (key.includes("ppl_") && key.includes("_met") && State.variables[key] === true) {
-        State.variables.ft_people = true;
+      State.variables.ft_people = true;
     }
   }
 }
@@ -15,64 +20,14 @@ if (!State.variables.ft_people) {
 if (!State.variables.ft_knowledge) {
   for (let key in State.variables) {
     if (key.includes("kn_") && key.includes("_lv") && State.variables[key] == true) {
-        /* 0 is falsy, 1+ is truthy. That's why the condition is == and not ===. */
-        State.variables.ft_knowledge = true;
+      /* 0 is falsy, 1+ is truthy. That's why the condition is == and not ===. */
+      State.variables.ft_knowledge = true;
     }
   }
 }
 
-
-settingsHandler();
-
-/* Reset if these already exist. If one exists, then the others must exist. */
-function settingsHandler() {
-  if (Template.has("he")) {
-    Template.delete("he");
-    Template.delete("him");
-    Template.delete("his");
-    Template.delete("Mr");
-    Template.delete("Mister");
-    Template.delete("wizard");
-    Template.delete("wizards");
-    Template.delete("boy");
-    Template.delete("man");
-  }
-
-  switch (settings.pronouns) {
-    case "male":
-      Template.add("he", "he");
-      Template.add("him", "him");
-      Template.add("his", "his");
-      Template.add("Mr", "Mr.");
-      Template.add("Mister", "Mister");
-      Template.add("wizard", "wizard");
-      Template.add("wizards", "wizards");
-      Template.add("boy", "boy");
-      Template.add("man", "man");
-      break;
-    case "female":
-      Template.add("he", "she");
-      Template.add("him", "her");
-      Template.add("his", "her");
-      Template.add("Mr", "Miss");
-      Template.add("Mister", "Miss");
-      Template.add("wizard", "witch");
-      Template.add("wizards", "witches");
-      Template.add("boy", "girl");
-      Template.add("man", "woman");
-      break;
-    default:
-      /* Assume "misc": */
-      Template.add("he", "they");
-      Template.add("him", "them");
-      Template.add("his", "their");
-      Template.add("Mr", "M.");
-      Template.add("Mister", "Gentleperson");
-      Template.add("wizard", "wizard");
-      Template.add("wizards", "wizards");
-      Template.add("man", "guy");
-  }
-}
+/* Handle Settings. */
+setup.fns.settingsHandler();
 <</script>>
 
 
@@ -95,13 +50,10 @@ It's intended for actual rendering stuff. */
 /* Everything here is done after each passage is rendered. Best for 
 event handlers and the like. */
 <<script>>
-
 /* Check if we want background images, remove them if we don't. */
 if (!settings.bgimg) {
   $('body').css("background-image", "none");
 }
-
-
 
 /* Add Fancy Chapter Header */
 // let curPsgTitle = State.active.title;
@@ -109,23 +61,10 @@ let curPsgTitle = passage();
 let curPsg = Story.get(curPsgTitle);
 let curPsgChapter = "Unknown Chapter";
 
-// Chapter Title Names
-let chaptertitles = {
-    "@0": "The Lucky Elixir",
-    "@1": "The Elixir",
-    "@2": "Of a Pin and Vials",
-    "@3": "An Orc and a Scry",
-    "@hub": "City Menu",
-    "@inn": "Meerkat Manor",
-    "@scry": "Scrying",
-    "@beach": "The Oasis",
-    "@forest": "Forest"
-};
-
-Object.keys(chaptertitles).forEach(key => {
-  /* NEXT: Add ability to check for an alternative title. For instance, if a possible has @1 but T2, then T2 should take precedence over @1. This should be done programmatically, and not be based on which tag is processed last. Once that's done, actually add in the new titles, like "The Departure" and whatnot. */
+Object.keys(setup.STR.TITLES).forEach(key => {
+  /* DESIRED: Add ability to check for an alternative title. For instance, if a possible has @1 but T2, then T2 should   takeprecedence over @1. This should be done programmatically, and not be based on which tag is processed last. Once that's  done,actually add in the new titles, like "The Departure" and whatnot. */
   if (curPsg.tags.includes(key)) {
-    curPsgChapter = chaptertitles[key];
+    curPsgChapter = setup.STR.TITLES[key];
     return;
   }
 });
@@ -174,29 +113,29 @@ const callback = function(mutationList, observer) {
         /* Check Warnings */
         psgTags.forEach(function(tag) {
           if (State.variables.ft_warning.includes(tag)) {
-              /* Adding the .cont-warning class will add the some css 
-              and allow us to show warnings. */
-              $(link).addClass("cont-warning");
-              
-              /* Add qualifying tags to the 'cont-warning' attribute so
-              we know which content we're warning the user about. */
-              if (typeof $(link).attr('cont-warning') === "undefined") {
-                  $(link).attr('cont-warning', tag);
-              } else {
-                  let tmp = " " + $(link).attr('cont-warning');
-                  $(link).attr('cont-warning', tag + tmp);
-              }
+            /* Adding the .cont-warning class will add the some css 
+            and allow us to show warnings. */
+            $(link).addClass("cont-warning");
+
+            /* Add qualifying tags to the 'cont-warning' attribute so
+            we know which content we're warning the user about. */
+            if (typeof $(link).attr('cont-warning') === "undefined") {
+              $(link).attr('cont-warning', tag);
+            } else {
+              let tmp = " " + $(link).attr('cont-warning');
+              $(link).attr('cont-warning', tag + tmp);
+            }
           }
 
           if ($(link).attr('cont-warning') !== undefined && !$(link).children('span').hasClass('warning-link')) {
             let contarr = $(link).attr('cont-warning').split(' ');
-            contarr =  [...new Set(contarr)];
+            contarr = [...new Set(contarr)];
             $(link).append("<br><span class='warning-link'>Warning: This link contains the following content: " + contarr + "</span>");
           }
-          
-          /* WARNING: This may make us unable to check for changes on link replace. */
+
+          /* BUG: This may make us unable to check for changes on link replace. */
           observer.disconnect();
-          
+
         });
       }
     });
@@ -223,41 +162,46 @@ $(document).ready(function() {
   $('.tooltip').tooltipster({
     contentCloning: true,
     theme: 'tooltipster-custom'
-  }); 
+  });
 });
 
 /* Discourage Forward/Backward if not usable. */
-if (typeof $._data( $("li#forwardTab")[0], "events") === "undefined") {
+if (typeof $._data($("li#forwardTab")[0], "events") === "undefined") {
   $("li#forwardTab")
     .ariaDisabled(State.length === State.size)
-    .ariaClick({one: true}, () => Engine.forward());
+    .ariaClick({
+      one: true
+    }, () => Engine.forward());
 } else {
   $("li#forwardTab")
     .ariaDisabled(State.length === State.size);
 }
 
 if ($("li#forwardTab").ariaIsDisabled()) {
-    $("li#forwardTab").css("color", "grey");
-    $("li#forwardTab").css("cursor", "not-allowed");
+  $("li#forwardTab").css("color", "grey");
+  $("li#forwardTab").css("cursor", "not-allowed");
 } else {
-    $("li#forwardTab").css("color", "inherit");
-    $("li#forwardTab").css("cursor", "pointer");
+  $("li#forwardTab").css("color", "inherit");
+  $("li#forwardTab").css("cursor", "pointer");
 }
 
-if (typeof $._data( $("li#backwardTab")[0], "events") === "undefined") {
+if (typeof $._data($("li#backwardTab")[0], "events") === "undefined") {
   $("li#backwardTab")
     .ariaDisabled(State.length < 2)
-	  .ariaClick({one: true}, () => Engine.backward());
+    .ariaClick({
+      one: true
+    }, () => Engine.backward());
 } else {
   $("li#backwardTab")
     .ariaDisabled(State.length < 2);
 }
 
 if ($("li#backwardTab").ariaIsDisabled()) {
-    $("li#backwardTab").css("color", "grey");
-    $("li#backwardTab").css("cursor", "not-allowed");
+  $("li#backwardTab").css("color", "grey");
+  $("li#backwardTab").css("cursor", "not-allowed");
 } else {
-    $("li#backwardTab").css("color", "inherit");
-    $("li#backwardTab").css("cursor", "pointer");
+  $("li#backwardTab").css("color", "inherit");
+  $("li#backwardTab").css("cursor", "pointer");
 }
+
 <</script>>

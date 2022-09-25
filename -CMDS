@@ -48,8 +48,9 @@ git rm -r --cached .
 
 
 # Build for Release:
-<!-- Run build.bat, alternatively use these commands. -->
+<!-- Run build.bat -->
 
+<!-- Alternatively, run these commands below: -->
 <!-- Build index.html file. -->
 tweegoc -o ./pre-build/index.html src -l 
 <!-- Build applications. MUST BE IN ADMIN MODE. -->

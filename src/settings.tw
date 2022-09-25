@@ -5,9 +5,9 @@ Twine Template
 
 :: StoryData [.initialize] {"position":"0,100"}
 {
-	"ifid": "5AE42077-63F3-4A3B-A076-E27B680A4DB8",
-    "format": "SugarCube",
-    "format-version": "2.36.1"
+	"ifid": "",
+  "format": "SugarCube",
+  "format-version": "2.36.1"
 }
 
 
@@ -23,44 +23,55 @@ LeahPeach
 
 
 :: StoryInit [.initialize] {"position":"0,400"}
-/* Everything here is only called once, when the story is initialized.
-This is great for variables and settings. */
+/* Everything here is only called once, when the story is initialized. */
 
 <<script>>
-/* Here we add the tooltip functionality to the macro system. We also 
-initialize the corresponding variables here, so we can keep 
-everything tidy. */
+(() => {
+  /* Solution supplied by Chapel:
+      Problem:
+  https://discord.com/channels/389867840406159362/389868418855075840/1014747488139354123
+      Solution:
+  https://discord.com/channels/389867840406159362/389868418855075840/1014814647297265705
+  */
 
-/* 
-##     ## ####  ######   ######  
-###   ###  ##  ##    ## ##    ## 
-#### ####  ##  ##       ##       
-## ### ##  ##   ######  ##       
-##     ##  ##        ## ##       
-##     ##  ##  ##    ## ##    ## 
-##     ## ####  ######   ######  
-*/
+  "use strict";
 
-/* Set a tooltip for a singular word. This also makes it a template. 
-BUG: After a linkreplace, this function doesn't work properly. Likely an issue with tt-macro. */
-function add_tooltip (macroname, passage, metaname = false) {
-    let psg = Story.get(passage);
-    
-    Template.add(macroname, function () {
-        let name = metaname ? metaname : this.name;
+  const lock = LoadScreen.lock();
 
-        // Only show tooltips if they're enabled in settings.
-        // AND
-        // TOOD: Only show tooltips if there is text in the passage.
-        if (settings.tooltips) {
-            return "<<tt " + psg.title + ">>" + name + "<</tt>>"
-        } else {
-            return name;
-        }
-        
+  // the core idea is that when the game is started or reloaded, we want the following things to happen:
+  // 1) we want all UI elements, `data-passages`, etc to render passages normally
+  // 2) we want to replace the onProcess handler with a custom one for the first "normal" passage render, including all header/footer/done/ready passage content
+  // 3) the onProcess handler should "defer" passage rendering by returning no content (an empty string) but after the promise is resolved, we will manually render the content
+  // 4) we need to remove the onProcess hanlder after the first passage render, as the promise is resolved
+  function process(psg) {
+    // handle the promise
+    Promise.all([setup.promises.importInit]).then(() => {
+      // Engine.show();
+      // wikify the passage content after the promise is resolved, then remove the loadscreen
+      $(".passage").wiki(psg.text.replace(/^\n+|\n+$/g, '').replace(/\n+/g, ' '));+
+      LoadScreen.unlock(lock);
     });
-};
+    // return no content (prevent initial render, we do it ourselves after the promise is resolved)
+    return "";
+  }
 
+  $(document).one(":passagestart", () => {
+    // one time event handler on passage start,
+    // we set the onProcess handler to our process function
+    // we need to do this here because we need to only process the passages that are part of the nav process (no UI `data-passage` content), but we do want headers, footers, etc
+    Config.passages.onProcess = process;
+    $(document).one(":passagedisplay", () => {
+      // we remove our process handler using another one time event
+      // passage display happens before `data-passage` content is processed, so the onProcess is back to normal by then
+      Config.passages.onProcess = undefined;
+    });
+  });
+})();
+
+/* Discord Widget */
+if (!Config.debug) {
+  setup.fns.importDiscordWidget()
+}
 
 /*
 ########     ###    ########    ###    ########     ###     ######  ######## 
@@ -72,7 +83,6 @@ function add_tooltip (macroname, passage, metaname = false) {
 ########  ##     ##    ##    ##     ## ########  ##     ##  ######  ######## 
 */
 
-/* DEV FEATURES */
 /* NOTE: These variables don't update when added to the script, reload 
 the script, and then refresh. This is fine for most things, but 
 when things are added here, I want them to be initialized on the 
@@ -90,84 +100,15 @@ State.variables.user.logged_in = false;
 State.variables.meta = {};
 State.variables.meta.psgsthatsentdb = [];
 
-
-/* Discord Widget */
-if (!Config.debug) {
-    importScripts('https://cdn.jsdelivr.net/npm/@widgetbot/crate@3')
-        .then(() => {
-            new Crate({ 
-              server: '1001698951516397590', /* LeahPeach Stories */
-              channel: '1001708306416533514' /* #📣┊announcements  */
-            }) 
-        })
-    ;
-}
-
-
-/* Useful if you have server-side stuff that you're doing. */
-importScripts(["src/assets/js/uuid.min.js", "src/assets/js/game_ssr.js"])
-    /* NOTE: You have to manually copy over the game_ssr.js webpack. A symlink doesn't work for some reason. This is done automatically in the build.bat. */
-    /* Strictly speaking, I don't need to import the above, but they give a promise and I have to have them loaded to do things, so... */
-    .then(() => {
-        /* Ensure we are logged in every time. */
-        State.variables.user.logged_in = false;
-
-        /* FIXME SERVER: We are making a local db from the exported object db (from game_ssr.js) This line is fucking cursed. Rename the exported object. */
-        db = new db; 
-        
-        if (!recall('user-uuid')) {
-            /* Brand new UUID, so the user will need to log in. */
-            memorize('user-uuid',  uuid_v4());
-            db.createLoginChecker(recall('user-uuid'), loggedin);
-            return;
-        }
-    
-        /* The UUID already exists, so let's try to get the itch_id and DB variables. */
-        try {
-            db.getItchID(recall('user-uuid'))
-            .then ((result) => {
-                /* If we can't get the ID, they've never logged in. */
-                if (result === undefined || result.itch_id === undefined) {
-                    /* We've never logged in. */
-                    db.createLoginChecker(recall('user-uuid'), loggedin);
-                    return;
-                }
-
-                loggedin(result.itch_id);
-            });
-        
-        } catch (e) {
-            console.warn(e);
-        }
-        
-    })
-    .catch(e => {
-        console.warn(e);
-    });
-
-    /* Run this one we are logged in. */
-    function loggedin(id) {
-        State.variables.user.itch_id = id
-        
-        db.getDBVars(State.variables.user.itch_id).then(result => {
-            /* When merging, if there are duplicate key names, the 
-            properties of the last object listed overwrites the 
-            previous one(s). */
-            State.variables.meta = {
-                ...State.variables.meta,
-                ...result
-            }
-        }).then(() => {
-            /* Set our client as logged in. */
-            State.variables.user.logged_in = true;
-            Engine.show(); // to rerun <<setmeta>>
-        });
-
-        /* NEXT: Create a one-time dialogue box that says, "You logged in! :D" */
-
-        return;
+setup.promises = {}
+setup.promises.importInit = importScripts(
+    "src/assets/js/uuid.min.js"
+  )
+  .then(
+    () => {
+      setup.fns.importGameSSR();
     }
-;
+  );
 
 /* 
 ##     ##    ###    ########  ####    ###    ########  ##       ########  ######  
@@ -178,6 +119,7 @@ importScripts(["src/assets/js/uuid.min.js", "src/assets/js/game_ssr.js"])
   ## ##   ##     ## ##    ##   ##  ##     ## ##     ## ##       ##       ##    ## 
    ###    ##     ## ##     ## #### ##     ## ########  ######## ########  ######  
 */
+
 /* GAME FEATURES */
 State.variables.ft_knowledge = false;
 State.variables.ft_people = false;
@@ -194,36 +136,31 @@ State.variables.ft_warning = [];
 State.variables.pc_nude = false;
 State.variables.pc_topless = false;
 /* The body parts the playable character has. */
-State.variables.pc = {}
-
-
-/* EVENTS  */
-/* These are generally used for logic and not stuff in the UIBar or tooltips. */
-State.variables.ev_any_event = false;
+State.variables.pc = {};
 
 
 /* KNOWLEDGE */
 /* These are used for tooltips and also in the knowledge tab. See UIBar/knowledge.tw */
 State.variables.kn_vampire_lv = 0;
-add_tooltip(["vampire", "vampires"], "K_Vampires");
+setup.fns.addTooltip(["vampire", "vampires"], "K_Vampires");
 
 
 // PEOPLE
 /* These are used for tooltips and also in the people tab. See UIBar/people.tw */
 State.variables.ppl_orick_met = false;
-add_tooltip("Orick", "P_Orick");
+setup.fns.addTooltip("Orick", "P_Orick");
 
 
 // LOCATIONS
 // Locations are completely unimplemented, but would be used the same way as people, but you discover them instead of meeting them.
 State.variables.loc_lox_disc = false;
 State.variables.loc_lox = 0;
-add_tooltip("Lox", "L_Lox")
+setup.fns.addTooltip("Lox", "L_Lox")
 
 
 // TOOLTIPS
 /* Misc. things that I want to have a tooltip but will otherwise never be seen. */
-add_tooltip("tower", "TT_Tower");
+setup.fns.addTooltip("tower", "TT_Tower");
 
 
 /*
@@ -244,20 +181,22 @@ add_tooltip("tower", "TT_Tower");
 
 // Toggle for Background Images.
 Setting.addToggle("bgimg", {
-    label: "Show Background Images?",
-    default: true
+  label: "Show Background Images?",
+  default: true
 });
 settings.bgimg = true;
 
-// TODO:
+// REQUIRED:
 // Toggle to hide images.
 // Toggle to turn off image blurring.
 
 // Toggle option for tooltips.
 Setting.addToggle("tooltips", {
-    label: "Show tooltips on important text?",
-    default: true,
-    onChange: () => { Engine.show() },
+  label: "Show tooltips on important text?",
+  default: true,
+  onChange: () => {
+    Engine.show()
+  },
 });
 settings.tooltips = true;
 
@@ -265,12 +204,15 @@ Setting.save();
 
 // Pronouns
 Setting.addList("pronouns", {
-    label   : "Preferred Pronouns:",
-    list    : [
-        "male", 
-        "female", 
-        "misc"],
-    default : "male",
-    onChange: () => { Engine.show() },
+  label: "Preferred Pronouns:",
+  list: [
+    "male",
+    "female",
+    "misc"
+  ],
+  default: "male",
+  onChange: () => {
+    Engine.show()
+  },
 });
 <</script>>
