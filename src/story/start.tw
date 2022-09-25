@@ -32,7 +32,8 @@
 
 <<done>>
 	<<script>>
-		settings.pronouns = "male";
+		settings.pronouns = State.temporary.pronouns;
+		Setting.save();
 
 		/* Update the settings variable every time it is clicked. */
 		$("a#cycle--pronouns").on("click", () => {
