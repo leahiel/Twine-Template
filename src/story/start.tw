@@ -1,4 +1,5 @@
 :: Start [@0 start nostats] {"position":"275,200"}
+<<bg "assets/img/bg/desolatecity.jpeg" 0.70>>
 <<set _pronouns to "male">>
 
 <gridcontainer>

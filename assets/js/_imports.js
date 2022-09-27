@@ -1,4 +1,4 @@
-// LINK: jscss/js/_setup.js#IMPORTS
+// LINK: assets/js/_setup.js#IMPORTS
 function importGameSSR() {
   /* Useful if you have server-side stuff that you're doing. */
   importScripts("src/assets/js/game_ssr.min.js")

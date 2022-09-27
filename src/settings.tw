@@ -5,7 +5,7 @@ Twine Template
 
 :: StoryData [.initialize] {"position":"0,100"}
 {
-	"ifid": "",
+	"ifid": "BF05BED3-33B5-4497-9C66-3E579D9FE1FD",
   "format": "SugarCube",
   "format-version": "2.36.1"
 }

@@ -1,4 +1,4 @@
-// LINK: jscss/js/_setup.js#UPDATE
+// LINK: assets/js/_setup.js#UPDATE
 
 function update_save() {
   //setup.version -> current version

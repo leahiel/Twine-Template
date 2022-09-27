@@ -1,4 +1,4 @@
-// LINK: jscss\js\_setup.js#TITLES
+// LINK: assets\js\_setup.js#TITLES
 // Chapter Title Names
 let TITLES = {
   "@0": "Create Your Character",

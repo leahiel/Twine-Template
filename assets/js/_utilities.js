@@ -1,4 +1,4 @@
-// LINK: jscss/js/_setup.js#utilities
+// LINK: assets/js/_setup.js#utilities
 /* Set a tooltip for a singular word. This also makes it a template. 
 BUG: After a linkreplace, this function doesn't work properly. Likely an issue with tt-macro. */
 function addTooltip(macroname, passage, metaname = false) {

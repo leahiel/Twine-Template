@@ -7,13 +7,13 @@
   }
 
   // ANCHOR[id=UPDATE]
-  // LINK: jscss/js/save/_update.js
+  // LINK: assets/js/save/_update.js
   S.fns.update_save = function () {
     update_save();
   };
 
   // ANCHOR[id=utilities]
-  // LINK: jscss/assets/js/_utilities.js
+  // LINK: assets/js/_utilities.js
   S.fns.addTooltip = function (macroname, passage, metaname = false) {
     addTooltip(macroname, passage, metaname);
   };
@@ -27,7 +27,7 @@
   };
 
   // ANCHOR[id=IMPORTS]
-  // LINK: jscss/assets/js/_imports.js
+  // LINK: assets/js/_imports.js
   S.fns.importGameSSR = function () {
     importGameSSR();
   };
