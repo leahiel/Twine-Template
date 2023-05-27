@@ -71,27 +71,20 @@ And there you go, all the text has been replaced! This text has been added using
 :: Link-Replace-Hide-Others [@ex nostats] {"position":"375,475"}
 Only one option can be picked, Which one will it be?
 <br><br>
-<<linkreplace "The top option is superior.<br>" t8n>>
-        You picked the top option!
-<</linkreplace>>
-<<linkreplace "I like bottoms.<br>" t8n>>
-        I get it, I do, but there's no need to say that.
-<</linkreplace>>
-<br><br>
-<span id="insert"></span>
-
-<<done>>
-    /* Create an event handler to check for <<linkreplace>> clicks. */
-    <<run
-        $("a.macro-linkreplace").on("click", function() {
-            /* Hide all other <<linkreplace>> macros. */
-            $("a.macro-linkreplace").addClass("display-none");
-
-            /* Insert text to #insert */
-            $("#insert").wiki(Story.get("Link-Replace-Hide-Others-Helper").processText());
-        });
-    >>
-<</done>>
+<span id="insert">
+    <<link "The top option is superior.<br>">>
+        <<replace "#insert">>You picked the top option!<</replace>>
+        <<append "#insert">>
+            <br><<include Link-Replace-Hide-Others-Helper>>
+        <</append>>
+    <</link>>
+    <<link "I like bottoms.<br>">>
+        <<replace "#insert">>I get it, I do, but there's no need to say that.<</replace>>
+        <<append "#insert">>
+            <br><<include Link-Replace-Hide-Others-Helper>>
+        <</append>>
+    <</link>>
+</span>
 
 :: Link-Replace-Hide-Others-Helper [@ex nostats] {"position":"375,500"}
 This is the helper text that appears after you pick an option.
